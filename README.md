@@ -16,5 +16,5 @@ npm run build
 
 ## License
 
-Data is derived from the work of volunteers for [Beirut Madinati](http://beirutmadinati.com/)
+Data is derived from the work of volunteers for [Beirut Madinati](http://beirutmadinati.com/).
 Code is licensed following [BSD-3-Clause](https://github.com/kamicut/vote-here-2016/blob/master/LICENSE)
