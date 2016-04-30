@@ -1,0 +1,45 @@
+{
+  "name": "vote-here-2016",
+  "version": "0.0.1",
+  "description": "Beirut 2016 Polling Station Map",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo index.js --live -- -t babelify | garnish",
+    "build:js": "browserify index.js > dist/index.js",
+    "build:html": "cp index.html dist/index.html",
+    "build": "npm run clean && mkdir html && npm run build:html && npm run build:js",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamicut/vote-here-2016.git"
+  },
+  "transform": [
+    [
+      "babelify"
+    ]
+  ],
+  "keywords": [
+    "vote",
+    "polling",
+    "data",
+    "elections"
+  ],
+  "author": "Marc Farra <marcfarra@gmail.com>",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/kamicut/vote-here-2016/issues"
+  },
+  "homepage": "https://github.com/kamicut/vote-here-2016#readme",
+  "dependencies": {
+    "preact": "^4.8.0",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.0",
+    "budo": "^8.2.2",
+    "garnish": "^5.2.0"
+  }
+}
