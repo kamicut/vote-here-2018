@@ -5,7 +5,7 @@ import DistrictPicker from './DistrictPicker.js';
 import SejjelInput from './SejjelInput.js';
 import GenderPicker from './GenderPicker.js';
 
-const Form = ({sect, subdistrict, sejjel, actions}) => {
+const Form = ({sect, subdistrict, sejjel, gender, actions}) => {
   return h(
     'div', {id: 'form'},
     h('header', null,
@@ -21,7 +21,8 @@ const Form = ({sect, subdistrict, sejjel, actions}) => {
       selected: subdistrict
     }),
     h(GenderPicker, {
-      onClick: actions.changeGender
+      onClick: actions.changeGender,
+      gender: gender
     }),
     h(SejjelInput, {
       onInput: actions.changeSejjel,
