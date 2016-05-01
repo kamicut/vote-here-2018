@@ -4,8 +4,9 @@ import {h, render, Component} from 'preact';
 import SectPicker from './components/SectPicker.js';
 import {getDistrictKey, districtArToEn} from './components/DistrictPicker.js';
 import DistrictPicker from './components/DistrictPicker.js';
+import SejjelInput from './components/SejjelInput.js';
+import GenderPicker from './components/GenderPicker.js';
 import MapboxMap from './components/MapboxMap.js';
-
 
 /**
  * Processes the polling station data into an index
@@ -90,7 +91,6 @@ class App extends Component {
   getInitialState() {
 
     return {
-      sejjel: '3',
       center: null
     };
   }
@@ -117,15 +117,19 @@ class App extends Component {
 
   }
 
+  fromGenderPicker(value) {
+    this.setState({gender: value});
+  }
+
   render(props, state) {
     console.log('CURRENT_STATE', state);
     return h(
-      'div', {id: 'main'},
+      'div', {id: 'app'},
       h(MapboxMap, {center: this.state.center}),
       h('div', {id: 'form'},
         h('header', null,
           h('h1', null, 'Where do I vote?'),
-          h('h2', null, 'Polling Center locations')
+          h('h2', null, 'Find your polling center')
          ),
         h(SectPicker, {
           options: state.sects,
@@ -137,20 +141,30 @@ class App extends Component {
           onChange: this.linkState('subdistrict'),
           selected: state.subdistrict
         }),
-
-        h('input', {
+        h(GenderPicker, {
+          onClick: this.fromGenderPicker.bind(this)
+        }),
+        h(SejjelInput, {
           onInput: this.linkState('sejjel'),
-          type: 'text',
-          value: state.sejjel
+          sejjel: state.sejjel
         }),
         h('input', {
           type: 'submit',
           value: 'Check',
           onClick: this.validateInput.bind(this)
-        }, 'Check'))
+        }, 'Check')
+       ),
+      h('footer', {id: 'footer'},
+        h('div', null,
+          h('span', null),
+          'Map made with ♥ by ',
+          h('a', {href: 'http://beirutmadinati.com', target: '_blank'}, 'Beirut Madinati'),
+          ' volunteers. ',
+          h('a', {href: 'http://github.com/kamicut/vote-here-2016'}, 'Link to data & code')
+         ))
     );
 
   }
 }
 
-render(h(App), document.getElementById('app'));
+render(h(App), document.body);
