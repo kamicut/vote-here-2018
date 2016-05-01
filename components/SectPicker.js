@@ -29,6 +29,7 @@ const SectPicker = ({selected, onChange}) => {
   });
   return h(
     'span', {id: 'sectpicker'},
+    h('label', {}, 'Sect:'),
     h('select', {
       onChange: onChange,
       value: selected

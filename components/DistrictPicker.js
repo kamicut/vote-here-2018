@@ -62,6 +62,7 @@ const DistrictPicker = ({selected, onChange}) => {
   });
   return h(
     'span', {id: 'districtpicker'},
+    h('label', {}, 'District:'),
     h('select', {
       onChange: onChange,
       value: selected
