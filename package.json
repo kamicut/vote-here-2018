@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "budo index.js --live -- -t babelify | garnish",
-    "build:js": "browserify index.js > dist/index.js",
+    "build:js": "browserify index.js -t babelify > dist/index.js",
     "build:html": "cp index.html dist/index.html",
-    "build": "npm run clean && mkdir html && npm run build:html && npm run build:js",
+    "build:assets": "cp -r data dist/data",
+    "build:css": "cp style.css dist/style.css",
+    "build:web": "npm run build:html && npm run build:css && npm run build:assets && npm run build:js",
+    "build": "npm run clean && mkdir dist && npm run build:web",
     "clean": "rm -rf dist"
   },
   "repository": {

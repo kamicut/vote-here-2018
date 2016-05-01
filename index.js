@@ -156,10 +156,17 @@ class App extends Component {
       h('div', {id: 'main'}, (state.selected
        ? h('div', {
          id: 'info'
-       }, h('p', {}, state.location.Name_AR),
+       },
+           h('p', {}, 'ID: ' + state.location.ID),
+           h('p', {}, state.location.Name_AR),
            h('p', {}, state.location.Name_EN),
-           h('p', {}, state.location.Latitude),
-           h('p', {}, state.location.Longitude),
+           h('a', {
+             href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
+             target: '_blank'
+           },
+             'Google Directions'
+            ),
+           h('br'),
            h('input', {
              type: 'submit',
              value: 'back',
