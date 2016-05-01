@@ -38,17 +38,23 @@ function process(json) {
 function join(json, geojson) {
   var subdistricts = {};
   var locations = {};
+  var infos = {};
+
+  // TODO make this more efficient
   geojson.features.forEach((feature) => {
     var props = feature.properties;
+
     subdistricts[props['ID']] = getDistrictKey(districtArToEn(props['Subdistrict']));
     locations[props['ID']] = feature.geometry.coordinates;
+    infos[props['ID']] = props;
   });
 
   return json.map((row) => {
     var subdistrict = subdistricts[row.place];
     var location = locations[row.place];
+    var info = infos[row.place];
     return Object.assign({}, row, {
-      subdistrict: subdistrict, center: location
+      subdistrict, center: location, info
     });
   });
 }
@@ -60,7 +66,6 @@ function join(json, geojson) {
  * @returns {Object[]} list of matching polling stations
  */
 function checkInIndex(index, entry) {
-  console.log(entry);
   let { sect, subdistrict, gender, val } = entry;
   var fromIndex = index[sect][subdistrict][gender];
   return fromIndex.filter((row) => {
@@ -88,7 +93,8 @@ class App extends Component {
   getInitialState() {
     return {
       center: null,
-      error: ''
+      error: '',
+      selected: false
     };
   }
 
@@ -113,9 +119,12 @@ class App extends Component {
       if (locations.length > 0) {
         console.log(locations);
         // Take the first one for now
-        let new_location = locations[0].center;
+        let new_location = locations[0];
+        console.log(new_location);
         this.setState({
-          center: new_location,
+          center: new_location.center,
+          location: new_location.info,
+          selected: true,
           error: ''
         });
       } else {
@@ -135,25 +144,42 @@ class App extends Component {
     this.setState({gender: value});
   }
 
+  returnToForm() {
+    this.setState({selected: false});
+  }
+
   render(props, state) {
     console.log('CURRENT_STATE', state);
     return h(
       'div', {id: 'app'},
       h(MapboxMap, {center: state.center}),
-      h('div', {id: 'main'},
-        h(Form, {
-          sect: state.sect,
-          gender: state.gender,
-          subdistrict: state.subdistrict,
-          sejjel: state.sejjel,
-          actions: {
-            changeSejjel: this.linkState('sejjel'),
-            changeSubdistrict: this.linkState('subdistrict'),
-            changeSect: this.linkState('sect'),
-            changeGender: this.fromGenderPicker.bind(this),
-            submit: this.validateInput.bind(this)
-          }
-        }),
+      h('div', {id: 'main'}, (state.selected
+       ? h('div', {
+         id: 'info'
+       }, h('p', {}, state.location.Name_AR),
+           h('p', {}, state.location.Name_EN),
+           h('p', {}, state.location.Latitude),
+           h('p', {}, state.location.Longitude),
+           h('input', {
+             type: 'submit',
+             value: 'back',
+             onClick: this.returnToForm.bind(this)
+           })
+          )
+       : h(Form, {
+           class: (state.selected? 'hide-form':''),
+           sect: state.sect,
+           gender: state.gender,
+           subdistrict: state.subdistrict,
+           sejjel: state.sejjel,
+           actions: {
+             changeSejjel: this.linkState('sejjel'),
+             changeSubdistrict: this.linkState('subdistrict'),
+             changeSect: this.linkState('sect'),
+             changeGender: this.fromGenderPicker.bind(this),
+             submit: this.validateInput.bind(this)
+           }
+       })),
         h('div', {id: 'errors'}, state.error)
        ),
       h('footer', {id: 'footer'},
@@ -165,7 +191,6 @@ class App extends Component {
           h('a', {href: 'http://github.com/kamicut/vote-here-2016'}, 'Link to data & code')
          ))
     );
-
   }
 }
 
