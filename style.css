@@ -19,7 +19,7 @@ body {
     width: 100%;
  
 }
-#form {
+#main {
     padding: 10px;
     font-size: 12px;
     margin: 10px;
@@ -62,7 +62,6 @@ h1 {
 /* Style Select Field */
 select {
   font-family: inherit;
-  background-color: transparent;
   width: 100%;
   padding: 4px 0;
   font-size: 14px;
@@ -73,6 +72,12 @@ select {
 /* Remove focus */
 select:focus {
   outline: none}
+
+
+/* Error */
+#errors {
+    color: red;
+}
 
 footer {
     font-size: 12px;

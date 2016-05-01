@@ -1,12 +1,9 @@
 import 'whatwg-fetch';
 
 import {h, render, Component} from 'preact';
-import SectPicker from './components/SectPicker.js';
 import {getDistrictKey, districtArToEn} from './components/DistrictPicker.js';
-import DistrictPicker from './components/DistrictPicker.js';
-import SejjelInput from './components/SejjelInput.js';
-import GenderPicker from './components/GenderPicker.js';
 import MapboxMap from './components/MapboxMap.js';
+import Form from './components/form.js';
 
 /**
  * Processes the polling station data into an index
@@ -89,32 +86,49 @@ class App extends Component {
   }
 
   getInitialState() {
-
     return {
-      center: null
+      center: null,
+      error: ''
     };
   }
 
   validateInput(e) {
     e.preventDefault();
-    var locations = checkInIndex(this.data, {
-      sect: Number(this.state.sect),
-      subdistrict: Number(this.state.subdistrict),
-      gender: 'F',
-      val: this.state.sejjel
-    });
+    let {sect, subdistrict, gender, sejjel} = this.state;
 
-    if (locations.length > 0) {
-      console.log(locations);
-      // Take the first one for now
-      let new_location = locations[0].center;
-      this.setState({
-        center: new_location
+    var valid = true;
+
+    valid = valid && sect && !isNaN(sect);
+    valid = valid && subdistrict && !isNaN(subdistrict);
+    valid = valid && sejjel && !isNaN(sejjel);
+    valid = valid && gender && (gender === 'M' || gender === 'F');
+
+    if (valid) {
+      var locations = checkInIndex(this.data, {
+        sect: Number(sect),
+        subdistrict: Number(subdistrict),
+        gender: gender,
+        val: sejjel
       });
-    } else {
-      console.log('couldn\'t find location');
+      if (locations.length > 0) {
+        console.log(locations);
+        // Take the first one for now
+        let new_location = locations[0].center;
+        this.setState({
+          center: new_location,
+          error: ''
+        });
+      } else {
+        this.setState({
+          error: 'couldn\'t find location'
+        });
+      }
     }
-
+    else {
+      this.setState({
+        error: 'Information entered incorrectly. Check for mistakes.'
+      });
+    }
   }
 
   fromGenderPicker(value) {
@@ -125,34 +139,22 @@ class App extends Component {
     console.log('CURRENT_STATE', state);
     return h(
       'div', {id: 'app'},
-      h(MapboxMap, {center: this.state.center}),
-      h('div', {id: 'form'},
-        h('header', null,
-          h('h1', null, 'Where do I vote?'),
-          h('h2', null, 'Find your polling center')
-         ),
-        h(SectPicker, {
-          options: state.sects,
-          onChange: this.linkState('sect'),
-          selected: state.sect
+      h(MapboxMap, {center: state.center}),
+      h('div', {id: 'main'},
+        h(Form, {
+          sect: state.sect,
+          gender: state.gender,
+          subdistrict: state.subdistrict,
+          sejjel: state.sejjel,
+          actions: {
+            changeSejjel: this.linkState('sejjel'),
+            changeSubdistrict: this.linkState('subdistrict'),
+            changeSect: this.linkState('sect'),
+            changeGender: this.fromGenderPicker.bind(this),
+            submit: this.validateInput.bind(this)
+          }
         }),
-        h(DistrictPicker, {
-          options: state.districts,
-          onChange: this.linkState('subdistrict'),
-          selected: state.subdistrict
-        }),
-        h(GenderPicker, {
-          onClick: this.fromGenderPicker.bind(this)
-        }),
-        h(SejjelInput, {
-          onInput: this.linkState('sejjel'),
-          sejjel: state.sejjel
-        }),
-        h('input', {
-          type: 'submit',
-          value: 'Check',
-          onClick: this.validateInput.bind(this)
-        }, 'Check')
+        h('div', {id: 'errors'}, state.error)
        ),
       h('footer', {id: 'footer'},
         h('div', null,
