@@ -3,12 +3,14 @@ import {h, Component} from 'preact';
 export default class MapboxMap extends Component {
   componentDidMount() {
     mapboxgl.accessToken = 'pk.eyJ1Ijoia2FtaWN1dCIsImEiOiJMVzF2NThZIn0.WO0ArcIIzYVioen3HpfugQ';
-    var mapCenter = this.props.center || [35.478866,33.894518];
+    var mapCenter = this.props.center || [35.507126,33.883812];
     this.map = new mapboxgl.Map({
       container: this._map,
-      style: 'mapbox://styles/kamicut/cinm462nw001nbom6nnwz899p', //stylesheet location
+      // style: 'mapbox://styles/kamicut/cinm462nw001nbom6nnwz899p', //stylesheet location
+      style: 'mapbox://styles/kamicut/cinort42e0044btm4ni0q4t5t',
       center: mapCenter,
-      zoom: 13.5 // starting zoom
+      maxBounds: [[35.445671,33.860010],[35.550556,33.920144]],
+      zoom: 12.5 // starting zoom
     });
 
     // Force a rerender
@@ -16,10 +18,13 @@ export default class MapboxMap extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // In case the first time
     if (nextProps.center) {
-      this.map.flyTo({center: nextProps.center, zoom: 16});
+      this.map.flyTo({center: nextProps.center, zoom: 17});
       this.center = nextProps.center;
+      this.map.setFilter('pollingstations', ['==', 'ID', nextProps.id]);
+      this.map.setPaintProperty('pollingstations', 'circle-opacity', 1);
+      this.map.setFilter('station_numbers', ['==', 'ID', nextProps.id]);
+      this.map.setPaintProperty('station_numbers', 'text-opacity', 1);
     }
   }
 

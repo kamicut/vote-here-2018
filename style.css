@@ -17,18 +17,25 @@ body {
     top: 0;
     bottom: 0;
     width: 100%;
- 
 }
+
+
 #main {
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+    z-index: 99999;
     max-width: 600px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 30px;
-    height: 100%;
-    padding: 10px;
-    font-size: 12px;
-    z-index: 99999;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.blocker {
+    position:absolute;
+    width: 100%;
+    z-index: -1;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 h1,h2,h3 {

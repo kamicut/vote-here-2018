@@ -152,41 +152,42 @@ class App extends Component {
     console.log('CURRENT_STATE', state);
     return h(
       'div', {id: 'app'},
-      h(MapboxMap, {center: state.center}),
-      h('div', {id: 'main'}, (state.selected
-       ? h('div', {
-         id: 'info'
-       },
-           h('p', {}, 'ID: ' + state.location.ID),
-           h('p', {}, state.location.Name_AR),
-           h('p', {}, state.location.Name_EN),
-           h('a', {
-             href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
-             target: '_blank'
-           },
-             'Google Directions'
-            ),
-           h('br'),
-           h('input', {
-             type: 'submit',
-             value: 'back',
-             onClick: this.returnToForm.bind(this)
-           })
-          )
-       : h(Form, {
-           class: (state.selected? 'hide-form':''),
-           sect: state.sect,
-           gender: state.gender,
-           subdistrict: state.subdistrict,
-           sejjel: state.sejjel,
-           actions: {
-             changeSejjel: this.linkState('sejjel'),
-             changeSubdistrict: this.linkState('subdistrict'),
-             changeSect: this.linkState('sect'),
-             changeGender: this.fromGenderPicker.bind(this),
-             submit: this.validateInput.bind(this)
-           }
-       })),
+      h(MapboxMap, {center: state.center, id: (state.location && state.location.ID) || 0}),
+      h('div', {id: 'main'}, (
+        state.selected
+          ? h('div', {
+            id: 'form'
+          },
+              h('p', {}, 'ID: ' + state.location.ID),
+              h('p', {}, state.location.Name_AR),
+              h('p', {}, state.location.Name_EN),
+              h('a', {
+                href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
+                target: '_blank'
+              },
+                'Google Directions'
+               ),
+              h('br'),
+              h('input', {
+                type: 'submit',
+                value: 'back',
+                onClick: this.returnToForm.bind(this)
+              })
+             )
+        : h(Form, {
+          class: (state.selected? 'hide-form':''),
+          sect: state.sect,
+          gender: state.gender,
+          subdistrict: state.subdistrict,
+          sejjel: state.sejjel,
+          actions: {
+            changeSejjel: this.linkState('sejjel'),
+            changeSubdistrict: this.linkState('subdistrict'),
+            changeSect: this.linkState('sect'),
+            changeGender: this.fromGenderPicker.bind(this),
+            submit: this.validateInput.bind(this)
+          }
+        })),
         h('div', {id: 'errors'}, state.error)
        ),
       h('footer', {id: 'footer'},
