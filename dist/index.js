@@ -11,6 +11,8 @@ exports.districtEnToAr = districtEnToAr;
 
 var _preact = require('preact');
 
+var labels = require('../i18n.json');
+
 var districts = {
   'Achrafieh': 1,
   'Rmeil': 2,
@@ -67,20 +69,22 @@ function districtEnToAr(name) {
 }
 
 var DistrictPicker = function DistrictPicker(_ref) {
+  var lang = _ref.lang;
   var selected = _ref.selected;
   var onChange = _ref.onChange;
 
   var mappedOptions = Object.keys(districts).map(function (option) {
-    return (0, _preact.h)('option', { value: districts[option], key: districts[option] }, option);
+    var text = lang === 'ar' ? districtEnToAr(option) : option;
+    return (0, _preact.h)('option', { value: districts[option], key: districts[option] }, text);
   });
-  return (0, _preact.h)('span', { id: 'districtpicker' }, (0, _preact.h)('label', {}, 'District:'), (0, _preact.h)('select', {
+  return (0, _preact.h)('span', { id: 'districtpicker' }, (0, _preact.h)('label', {}, labels[lang].labels.district), (0, _preact.h)('br'), (0, _preact.h)('select', {
     onChange: onChange,
     value: selected
-  }, (0, _preact.h)('option', { disabled: true, selected: 'default' }, 'Choose a district'), mappedOptions));
+  }, (0, _preact.h)('option', { disabled: true, selected: 'default' }, labels[lang].labels.district_default), mappedOptions));
 };
 exports.default = DistrictPicker;
 
-},{"preact":8}],2:[function(require,module,exports){
+},{"../i18n.json":7,"preact":9}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -89,27 +93,30 @@ Object.defineProperty(exports, "__esModule", {
 
 var _preact = require('preact');
 
+var labels = require('../i18n.json');
+
 var GenderPicker = function GenderPicker(props) {
-  return (0, _preact.h)('div', { id: 'genderpicker' }, (0, _preact.h)('label', {}, 'Gender:'), (0, _preact.h)('br'), (0, _preact.h)('input', {
+  var lang = props.lang;
+  return (0, _preact.h)('div', { id: 'genderpicker' }, (0, _preact.h)('label', {}, labels[lang].labels.gender), (0, _preact.h)('br'), (0, _preact.h)('input', {
     type: 'radio',
     value: 'F',
     checked: props.gender === 'F',
     onClick: function onClick() {
       return props.onClick('F');
     }
-  }), 'Female', (0, _preact.h)('br'), (0, _preact.h)('input', {
+  }), labels[lang].labels.female, (0, _preact.h)('br'), (0, _preact.h)('input', {
     type: 'radio',
     value: 'M',
     checked: props.gender === 'M',
     onClick: function onClick() {
       return props.onClick('M');
     }
-  }, 'Male'), 'Male', (0, _preact.h)('br'));
+  }), labels[lang].labels.male, (0, _preact.h)('br'));
 };
 
 exports.default = GenderPicker;
 
-},{"preact":8}],3:[function(require,module,exports){
+},{"../i18n.json":7,"preact":9}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -192,7 +199,7 @@ var MapboxMap = function (_Component) {
 
 exports.default = MapboxMap;
 
-},{"preact":8}],4:[function(require,module,exports){
+},{"preact":9}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -200,6 +207,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _preact = require('preact');
+
+var labels = require('../i18n.json');
 
 var sects = {
   'Armenian Orthodox': 1,
@@ -224,21 +233,46 @@ var sects = {
   'Other': 20
 };
 
+var sects_map = {
+  'Armenian Orthodox': 'ارمن ارثوذكس',
+  'Armenian Catholic': 'ارمن كاثوليك',
+  'Israelite': 'اسرائيلي',
+  'Achouri': 'اشوري',
+  'Achouri Orthodoxe': 'اشوري ارثوذكس',
+  'Evangelical': 'انجيلي',
+  'Druze': 'درزي',
+  'Greek Orthodox': 'روم ارثوذكس',
+  'Greek Catholic': 'روم كاثوليك',
+  'Syriac Orthodox': 'سريان ارثوذكس',
+  'Syriac Catholic': 'سريان كاثوليك',
+  'Sunni': 'سني',
+  'Shia': 'شيعي',
+  'Alawite': 'علوي',
+  'Caldan': 'كلدان',
+  'Caldan Orthodoxe': 'كلدان ارثوذكس',
+  'Caldan Catholic': 'كلدان كاثوليك',
+  'Latin': 'لاتين',
+  'Maronite': 'ماروني',
+  'Other': 'مختلط'
+};
+
 var SectPicker = function SectPicker(_ref) {
+  var lang = _ref.lang;
   var selected = _ref.selected;
   var onChange = _ref.onChange;
 
   var mappedOptions = Object.keys(sects).map(function (option) {
-    return (0, _preact.h)('option', { value: sects[option], key: sects[option] }, option);
+    var text = lang === 'ar' ? sects_map[option] : option;
+    return (0, _preact.h)('option', { value: sects[option], key: sects[option] }, text);
   });
-  return (0, _preact.h)('span', { id: 'sectpicker' }, (0, _preact.h)('label', {}, 'Sect:'), (0, _preact.h)('select', {
+  return (0, _preact.h)('span', { id: 'sectpicker' }, (0, _preact.h)('label', {}, labels[lang].labels.sect), (0, _preact.h)('br'), (0, _preact.h)('select', {
     onChange: onChange,
     value: selected
-  }, (0, _preact.h)('option', { disabled: true, selected: 'default' }, 'Choose a sect'), mappedOptions));
+  }, (0, _preact.h)('option', { disabled: true, selected: 'default' }, labels[lang].labels.sect_default), mappedOptions));
 };
 exports.default = SectPicker;
 
-},{"preact":8}],5:[function(require,module,exports){
+},{"../i18n.json":7,"preact":9}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -247,20 +281,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _preact = require('preact');
 
+var labels = require('../i18n.json');
+
 var SejjelInput = function SejjelInput(_ref) {
   var sejjel = _ref.sejjel;
   var onInput = _ref.onInput;
-  return (0, _preact.h)('div', { id: 'sejjelinput' }, (0, _preact.h)('label', {}, 'Sejjel: '), (0, _preact.h)('br'), (0, _preact.h)('input', {
+  var lang = _ref.lang;
+  return (0, _preact.h)('div', { id: 'sejjelinput' }, (0, _preact.h)('label', {}, labels[lang].labels.sejjel), (0, _preact.h)('br'), (0, _preact.h)('input', {
     onInput: onInput,
     type: 'text',
-    placeholder: 'Sejjel Number',
+    placeholder: labels[lang].labels.sejjel_default,
     value: sejjel
   }));
 };
 
 exports.default = SejjelInput;
 
-},{"preact":8}],6:[function(require,module,exports){
+},{"../i18n.json":7,"preact":9}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -287,35 +324,90 @@ var _GenderPicker2 = _interopRequireDefault(_GenderPicker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var labels = require('../i18n.json');
+
 var Form = function Form(_ref) {
+  var lang = _ref.lang;
   var sect = _ref.sect;
   var subdistrict = _ref.subdistrict;
   var sejjel = _ref.sejjel;
   var gender = _ref.gender;
   var actions = _ref.actions;
 
-  return (0, _preact.h)('div', { id: 'form' }, (0, _preact.h)('header', null, (0, _preact.h)('h1', null, 'Where do I vote?'), (0, _preact.h)('h2', null, 'Beirut Municipal Election 2016')), (0, _preact.h)(_SectPicker2.default, {
+  return (0, _preact.h)('div', { id: 'form' }, (0, _preact.h)('header', null, (0, _preact.h)('h1', null, labels[lang].title), (0, _preact.h)('h2', null, labels[lang].subtitle)), (0, _preact.h)(_SectPicker2.default, {
     onChange: actions.changeSect,
-    selected: sect
-  }), (0, _preact.h)(_DistrictPicker2.default, {
+    selected: sect,
+    lang: lang
+  }), (0, _preact.h)('br'), (0, _preact.h)(_DistrictPicker2.default, {
     onChange: actions.changeSubdistrict,
-    selected: subdistrict
+    selected: subdistrict,
+    lang: lang
   }), (0, _preact.h)(_GenderPicker2.default, {
     onClick: actions.changeGender,
-    gender: gender
+    gender: gender,
+    lang: lang
   }), (0, _preact.h)(_SejjelInput2.default, {
     onInput: actions.changeSejjel,
-    sejjel: sejjel
+    sejjel: sejjel,
+    lang: lang
   }), (0, _preact.h)('input', {
     type: 'submit',
-    value: 'Check',
+    value: labels[lang].labels.submit,
     onClick: actions.submit
-  }, 'Check'));
+  }, labels[lang].labels.submit));
 };
 
 exports.default = Form;
 
-},{"./DistrictPicker.js":1,"./GenderPicker.js":2,"./SectPicker.js":4,"./SejjelInput.js":5,"preact":8}],7:[function(require,module,exports){
+},{"../i18n.json":7,"./DistrictPicker.js":1,"./GenderPicker.js":2,"./SectPicker.js":4,"./SejjelInput.js":5,"preact":9}],7:[function(require,module,exports){
+module.exports={
+  "ar": {
+    "title": 'أين أنتخب؟',
+    "subtitle": 'الانتخابات البلدية في بيروت',
+    "labels": {
+      "sect": 'المذهب:',
+      "sect_default": 'اختيار المذهب',
+      "district": 'المحلة:',
+      "district_default": 'اختيار المحلة',
+      "gender": 'الجنس:',
+      "male": 'ذكر',
+      "female": 'أنثى',
+      "sejjel": 'رقم السجل:',
+      "sejjel_default": 'رقم السجل',
+      "submit": 'بحث',
+      "google_directions": 'اتجاهات'
+    },
+    "errors": {
+      "location_not_found": 'لا نستطيع تحديد موقع',
+      "validation_error": 'تم إدخال المعلومات بشكل غير صحيح. تحقق من الأخطاء'
+    }
+
+  },
+  "en": {
+    "title": 'Where do I vote?',
+    "subtitle": 'Beirut Municipal Elections 2016',
+    "labels": {
+      "sect": 'Sect:',
+      "sect_default": 'Choose a sect',
+      "district": 'District:',
+      "district_default": 'Choose a district',
+      "gender": 'gender',
+      "male": 'Male',
+      "female": 'Female',
+      "sejjel": 'Sejjel Number:',
+      "sejjel_default": 'Sejjel Number',
+      "submit": 'check',
+      "google_directions": 'Google Directions'
+    },
+    "errors": {
+      "location_not_found": 'Couldn\'t find location',
+      "validation_error": 'Information entered incorrectly. Check for mistakes.'
+    }
+
+  }
+}
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -341,6 +433,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var labels = require('./i18n.json');
 
 /**
  * Processes the polling station data into an index
@@ -445,7 +539,8 @@ var App = function (_Component) {
       return {
         center: null,
         error: '',
-        selected: false
+        selected: false,
+        lang: 'ar'
       };
     }
   }, {
@@ -457,6 +552,7 @@ var App = function (_Component) {
       var subdistrict = _state.subdistrict;
       var gender = _state.gender;
       var sejjel = _state.sejjel;
+      var lang = _state.lang;
 
 
       var valid = true;
@@ -486,12 +582,12 @@ var App = function (_Component) {
           });
         } else {
           this.setState({
-            error: 'couldn\'t find location'
+            error: labels[lang].errors.location_not_found
           });
         }
       } else {
         this.setState({
-          error: 'Information entered incorrectly. Check for mistakes.'
+          error: labels[lang].errors.validation_error
         });
       }
     }
@@ -506,15 +602,26 @@ var App = function (_Component) {
       this.setState({ selected: false });
     }
   }, {
+    key: 'setLang',
+    value: function setLang(lang) {
+      this.setState({ lang: lang });
+    }
+  }, {
     key: 'render',
     value: function render(props, state) {
       console.log('CURRENT_STATE', state);
-      return (0, _preact.h)('div', { id: 'app' }, (0, _preact.h)(_MapboxMap2.default, { center: state.center, id: state.location && state.location.ID || 0 }), (0, _preact.h)('div', { id: 'main' }, state.selected ? (0, _preact.h)('div', {
+      return (0, _preact.h)('div', { id: 'app' }, (0, _preact.h)(_MapboxMap2.default, { center: state.center, id: state.location && state.location.ID || 0 }), (0, _preact.h)('div', { id: 'main', class: state.lang === 'ar' ? '' : 'override' }, (0, _preact.h)('header', { id: 'lang-selector' }, (0, _preact.h)('a', {
+        class: 'lang-btn' + (state.lang === 'ar' ? ' lang-btn-bold' : ''),
+        onClick: this.setLang.bind(this, 'ar')
+      }, 'AR'), ' | ', (0, _preact.h)('a', {
+        class: 'lang-btn' + (state.lang === 'en' ? ' lang-btn-bold' : ''),
+        onClick: this.setLang.bind(this, 'en')
+      }, 'EN')), state.selected ? (0, _preact.h)('div', {
         id: 'form'
-      }, (0, _preact.h)('p', {}, 'ID: ' + state.location.ID), (0, _preact.h)('p', {}, state.location.Name_AR), (0, _preact.h)('p', {}, state.location.Name_EN), (0, _preact.h)('a', {
+      }, state.lang === 'ar' ? (0, _preact.h)('p', {}, state.location.Name_AR) : (0, _preact.h)('p', {}, state.location.Name_EN), (0, _preact.h)('a', {
         href: 'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
         target: '_blank'
-      }, 'Google Directions'), (0, _preact.h)('br'), (0, _preact.h)('input', {
+      }, labels[state.lang].labels.google_directions), (0, _preact.h)('br'), (0, _preact.h)('input', {
         type: 'submit',
         value: 'back',
         onClick: this.returnToForm.bind(this)
@@ -524,6 +631,7 @@ var App = function (_Component) {
         gender: state.gender,
         subdistrict: state.subdistrict,
         sejjel: state.sejjel,
+        lang: state.lang,
         actions: {
           changeSejjel: this.linkState('sejjel'),
           changeSubdistrict: this.linkState('subdistrict'),
@@ -540,7 +648,7 @@ var App = function (_Component) {
 
 (0, _preact.render)((0, _preact.h)(App), document.body);
 
-},{"./components/DistrictPicker.js":1,"./components/MapboxMap.js":3,"./components/form.js":6,"preact":8,"whatwg-fetch":9}],8:[function(require,module,exports){
+},{"./components/DistrictPicker.js":1,"./components/MapboxMap.js":3,"./components/form.js":6,"./i18n.json":7,"preact":9,"whatwg-fetch":10}],9:[function(require,module,exports){
 !function(global, factory) {
     'object' == typeof exports && 'undefined' != typeof module ? module.exports = factory() : 'function' == typeof define && define.amd ? define(factory) : global.preact = factory();
 }(this, function() {
@@ -1142,7 +1250,7 @@ var App = function (_Component) {
     return preact;
 });
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function(self) {
   'use strict';
 
@@ -1577,4 +1685,4 @@ var App = function (_Component) {
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
-},{}]},{},[7]);
+},{}]},{},[8]);

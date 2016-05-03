@@ -2,6 +2,7 @@
 body {
     margin:0;
     padding:0;
+    direction: rtl;
 }
 
 #app {
@@ -19,6 +20,17 @@ body {
     width: 100%;
 }
 
+#lang-selector {
+    text-align: left;
+}
+
+.lang-btn {
+    cursor: pointer;
+}
+
+.lang-btn-bold {
+    font-weight: bold;
+}
 
 #main {
     padding: 10px;
@@ -29,6 +41,10 @@ body {
     margin-right: auto;
     margin-left: auto;
     background: rgba(255, 255, 255, 0.9);
+}
+
+.override {
+    direction: ltr;
 }
 
 .blocker {
@@ -78,9 +94,9 @@ h1 {
 /* Style Select Field */
 select {
   font-family: inherit;
-  width: 100%;
-  padding: 4px 0;
   font-size: 14px;
+  width: 130px;
+  direction: ltr;
   border: none;
   border-bottom: 1px solid $select-border-color;
 }
