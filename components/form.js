@@ -5,34 +5,41 @@ import DistrictPicker from './DistrictPicker.js';
 import SejjelInput from './SejjelInput.js';
 import GenderPicker from './GenderPicker.js';
 
-const Form = ({sect, subdistrict, sejjel, gender, actions}) => {
+const labels = require('../i18n.json');
+
+const Form = ({lang, sect, subdistrict, sejjel, gender, actions}) => {
   return h(
     'div', {id: 'form'},
     h('header', null,
-      h('h1', null, 'Where do I vote?'),
-      h('h2', null, 'Beirut Municipal Election 2016')
+      h('h1', null, labels[lang].title),
+      h('h2', null, labels[lang].subtitle)
      ),
     h(SectPicker, {
       onChange: actions.changeSect,
-      selected: sect
+      selected: sect,
+      lang: lang
     }),
+    h('br'),
     h(DistrictPicker, {
       onChange: actions.changeSubdistrict,
-      selected: subdistrict
+      selected: subdistrict,
+      lang: lang
     }),
     h(GenderPicker, {
       onClick: actions.changeGender,
-      gender: gender
+      gender: gender,
+      lang: lang
     }),
     h(SejjelInput, {
       onInput: actions.changeSejjel,
-      sejjel: sejjel
+      sejjel: sejjel,
+      lang: lang
     }),
     h('input', {
       type: 'submit',
-      value: 'Check',
+      value: labels[lang].labels.submit,
       onClick: actions.submit
-    }, 'Check')
+    }, labels[lang].labels.submit)
   );
 }
 

@@ -1,4 +1,5 @@
 import {h} from 'preact';
+const labels = require('../i18n.json');
 
 const districts =  {
   'Achrafieh': 1,
@@ -13,7 +14,7 @@ const districts =  {
   'Msaitbe': 10,
   'Mreisse': 11,
   'Marfa': 12
-}
+};
 
 const districts_ar = {
   'الاشرفية': 'Achrafieh',
@@ -28,7 +29,7 @@ const districts_ar = {
   'المصيطبة': 'Msaitbe',
   'دار المريسة': 'Mreisse',
   'المرفأ': 'Marfa'
-}
+};
 
 
 const districts_en = {};
@@ -56,18 +57,20 @@ export function districtEnToAr(name) {
   return districts_en[name];
 }
 
-const DistrictPicker = ({selected, onChange}) => {
+const DistrictPicker = ({lang, selected, onChange}) => {
   const mappedOptions = Object.keys(districts).map((option) => {
-    return h('option', {value: districts[option], key: districts[option]}, option);
+    const text = (lang === 'ar'? districtEnToAr(option):option);
+    return h('option', {value: districts[option], key: districts[option]}, text);
   });
   return h(
     'span', {id: 'districtpicker'},
-    h('label', {}, 'District:'),
+    h('label', {}, labels[lang].labels.district),
+    h('br'),
     h('select', {
       onChange: onChange,
       value: selected
     },
-      h('option', {disabled: true, selected: 'default'}, 'Choose a district'),
+      h('option', {disabled: true, selected: 'default'}, labels[lang].labels.district_default),
       mappedOptions));
 };
 export default DistrictPicker;

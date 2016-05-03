@@ -5,6 +5,8 @@ import {getDistrictKey, districtArToEn} from './components/DistrictPicker.js';
 import MapboxMap from './components/MapboxMap.js';
 import Form from './components/form.js';
 
+const labels = require('./i18n.json');
+
 /**
  * Processes the polling station data into an index
  * @param {Object[]} json
@@ -94,13 +96,14 @@ class App extends Component {
     return {
       center: null,
       error: '',
-      selected: false
+      selected: false,
+      lang: 'ar'
     };
   }
 
   validateInput(e) {
     e.preventDefault();
-    let {sect, subdistrict, gender, sejjel} = this.state;
+    let {sect, subdistrict, gender, sejjel, lang} = this.state;
 
     var valid = true;
 
@@ -129,13 +132,13 @@ class App extends Component {
         });
       } else {
         this.setState({
-          error: 'couldn\'t find location'
+          error: labels[lang].errors.location_not_found
         });
       }
     }
     else {
       this.setState({
-        error: 'Information entered incorrectly. Check for mistakes.'
+        error: labels[lang].errors.validation_error
       });
     }
   }
@@ -148,24 +151,40 @@ class App extends Component {
     this.setState({selected: false});
   }
 
+  setLang(lang) {
+    this.setState({lang: lang});
+  }
+
   render(props, state) {
     console.log('CURRENT_STATE', state);
     return h(
       'div', {id: 'app'},
       h(MapboxMap, {center: state.center, id: (state.location && state.location.ID) || 0}),
-      h('div', {id: 'main'}, (
-        state.selected
+      h('div', {id: 'main', class: (state.lang === 'ar'?'':'override')},
+        h('header',
+          {id: 'lang-selector'},
+          h('a', {
+            class: 'lang-btn' + (state.lang === 'ar'? ' lang-btn-bold':''),
+            onClick: this.setLang.bind(this, 'ar')
+          }, 'AR'),
+          ' | ',
+          h('a', {
+            class: 'lang-btn' + (state.lang === 'en'? ' lang-btn-bold':''),
+            onClick: this.setLang.bind(this, 'en')
+          }, 'EN')
+         ),
+        (state.selected
           ? h('div', {
             id: 'form'
           },
-              h('p', {}, 'ID: ' + state.location.ID),
-              h('p', {}, state.location.Name_AR),
-              h('p', {}, state.location.Name_EN),
+              (state.lang=== 'ar'
+               ? h('p', {}, state.location.Name_AR)
+               : h('p', {}, state.location.Name_EN)),
               h('a', {
                 href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
                 target: '_blank'
               },
-                'Google Directions'
+                labels[state.lang].labels.google_directions
                ),
               h('br'),
               h('input', {
@@ -180,6 +199,7 @@ class App extends Component {
           gender: state.gender,
           subdistrict: state.subdistrict,
           sejjel: state.sejjel,
+          lang: state.lang,
           actions: {
             changeSejjel: this.linkState('sejjel'),
             changeSubdistrict: this.linkState('subdistrict'),

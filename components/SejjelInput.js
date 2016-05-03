@@ -1,13 +1,14 @@
 import {h} from 'preact';
+const labels = require('../i18n.json');
 
-const SejjelInput = ({sejjel, onInput}) => h(
+const SejjelInput = ({sejjel, onInput, lang}) => h(
   'div', {id: 'sejjelinput'},
-  h('label', {}, 'Sejjel: '),
+  h('label', {}, labels[lang].labels.sejjel),
   h('br'),
   h('input', {
     onInput: onInput,
     type: 'text',
-    placeholder: 'Sejjel Number',
+    placeholder: labels[lang].labels.sejjel_default,
     value: sejjel
   })
 );

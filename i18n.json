@@ -1,0 +1,46 @@
+{
+  "ar": {
+    "title": 'أين أنتخب؟',
+    "subtitle": 'الانتخابات البلدية في بيروت',
+    "labels": {
+      "sect": 'المذهب:',
+      "sect_default": 'اختيار المذهب',
+      "district": 'المحلة:',
+      "district_default": 'اختيار المحلة',
+      "gender": 'الجنس:',
+      "male": 'ذكر',
+      "female": 'أنثى',
+      "sejjel": 'رقم السجل:',
+      "sejjel_default": 'رقم السجل',
+      "submit": 'بحث',
+      "google_directions": 'اتجاهات'
+    },
+    "errors": {
+      "location_not_found": 'لا نستطيع تحديد موقع',
+      "validation_error": 'تم إدخال المعلومات بشكل غير صحيح. تحقق من الأخطاء'
+    }
+
+  },
+  "en": {
+    "title": 'Where do I vote?',
+    "subtitle": 'Beirut Municipal Elections 2016',
+    "labels": {
+      "sect": 'Sect:',
+      "sect_default": 'Choose a sect',
+      "district": 'District:',
+      "district_default": 'Choose a district',
+      "gender": 'gender',
+      "male": 'Male',
+      "female": 'Female',
+      "sejjel": 'Sejjel Number:',
+      "sejjel_default": 'Sejjel Number',
+      "submit": 'check',
+      "google_directions": 'Google Directions'
+    },
+    "errors": {
+      "location_not_found": 'Couldn\'t find location',
+      "validation_error": 'Information entered incorrectly. Check for mistakes.'
+    }
+
+  }
+}
