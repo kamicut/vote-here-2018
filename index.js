@@ -13,6 +13,7 @@ const labels = require('./i18n.json');
  * @return An index of the polling stations grouped by sect,gender
  */
 function process(json) {
+  console.log(json);
   var index = {};
   json.forEach((item) => {
     let {sect, gender, subdistrict} = item;
@@ -38,25 +39,21 @@ function process(json) {
  * @return {Object} Unified JSON
  */
 function join(json, geojson) {
-  var subdistricts = {};
   var locations = {};
   var infos = {};
 
   // TODO make this more efficient
   geojson.features.forEach((feature) => {
     var props = feature.properties;
-
-    subdistricts[props['ID']] = getDistrictKey(districtArToEn(props['Subdistrict']));
     locations[props['ID']] = feature.geometry.coordinates;
     infos[props['ID']] = props;
   });
 
   return json.map((row) => {
-    var subdistrict = subdistricts[row.place];
     var location = locations[row.place];
     var info = infos[row.place];
     return Object.assign({}, row, {
-      subdistrict, center: location, info
+      center: location, info
     });
   });
 }
@@ -178,8 +175,8 @@ class App extends Component {
             id: 'form'
           },
               (state.lang=== 'ar'
-               ? h('p', {}, state.location.Name_AR)
-               : h('p', {}, state.location.Name_EN)),
+               ? h('p', {}, state.location.NAME_AR)
+               : h('p', {}, state.location.NAME_EN)),
               h('a', {
                 href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
                 target: '_blank'
