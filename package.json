@@ -10,7 +10,7 @@
     "build:assets": "cp -r data dist/data",
     "build:css": "cp style.css dist/style.css",
     "build:web": "npm run build:html && npm run build:css && npm run build:assets && npm run build:js",
-    "build": "npm run clean && mkdir dist && npm run build:web",
+    "build": "npm run clean && mkdir dist && cp CNAME dist && npm run build:web",
     "clean": "rm -rf dist"
   },
   "repository": {
