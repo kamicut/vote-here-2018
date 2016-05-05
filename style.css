@@ -110,25 +110,3 @@ select:focus {
     color: red;
 }
 
-footer {
-    font-size: 12px;
-    padding: 5px;
-    position: absolute;
-    bottom: 0;
-    color: #999;
-    background-color: #111;
-    width: 100%;
-}
-
-footer a {
-    color: #599;
-}
-
-footer a:hover {
-    color: #999;
-}
-
-footer a:visited {
-    color: #099;
-}
-

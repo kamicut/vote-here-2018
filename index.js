@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 
 import {h, render, Component} from 'preact';
-import {getDistrictKey, districtArToEn} from './components/DistrictPicker.js';
 import MapboxMap from './components/MapboxMap.js';
 import Form from './components/form.js';
 
@@ -120,10 +119,10 @@ class App extends Component {
         console.log(locations);
         // Take the first one for now
         let new_location = locations[0];
-        console.log(new_location);
         this.setState({
           center: new_location.center,
           location: new_location.info,
+          room: new_location.room,
           selected: true,
           error: ''
         });
@@ -177,6 +176,7 @@ class App extends Component {
               (state.lang=== 'ar'
                ? h('p', {}, state.location.NAME_AR)
                : h('p', {}, state.location.NAME_EN)),
+              h('div', {}, labels[state.lang].labels.room + ' ' + state.room),
               h('a', {
                 href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
                 target: '_blank'
@@ -205,16 +205,16 @@ class App extends Component {
             submit: this.validateInput.bind(this)
           }
         })),
-        h('div', {id: 'errors'}, state.error)
-       ),
-      h('footer', {id: 'footer'},
-        h('div', null,
-          h('span', null),
-          'Map made with ♥ by ',
-          h('a', {href: 'http://beirutmadinati.com', target: '_blank'}, 'Beirut Madinati'),
-          ' volunteers. ',
-          h('a', {href: 'http://github.com/kamicut/vote-here-2016'}, 'Link to data & code')
-         ))
+        h('div', {id: 'errors'}, state.error),
+        h('hr'),
+        h('footer', {},
+          h('div', {}, labels[state.lang].about.problems),
+          h('span', {}, labels[state.lang].about.blurb1),
+          h('a', {'href': "http://beirutmadinati.com", "target": "_blank"}, " " + labels[state.lang].about.bm),
+          h('span', {}, ". " + labels[state.lang].about.blurb2 + " "),
+          h('a', {'href': "https://github.com/kamicut/vote-here-2016", "target": "_blank"}, labels[state.lang].about.link)
+        )
+       )
     );
   }
 }

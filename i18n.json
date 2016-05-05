@@ -13,11 +13,19 @@
       "sejjel": 'رقم السجل:',
       "sejjel_default": 'رقم السجل',
       "submit": 'بحث',
+      "room": 'غرفة',
       "google_directions": 'اتجاهات'
     },
     "errors": {
       "location_not_found": 'لا نستطيع تحديد موقع',
       "validation_error": 'تم إدخال المعلومات بشكل غير صحيح. تحقق من الأخطاء'
+    },
+    "about": {
+      "problems": "لملاحظاتكم و إستفساراتكم، و في حال ورود أي خطأ، يرجى التواصل معنا على ٠٣٩٠٣٢٦١",
+      "blurb1": "هذا المشروع هو مبادرة مستقلة من متطوعي حملة",
+      "blurb2": "يمكنكم الحصول على كافة البيانات و المعلومات",
+      "bm": "بيروت مدينتي",
+      "link": "هنا"
     }
 
   },
@@ -35,12 +43,19 @@
       "sejjel": 'Sejjel Number:',
       "sejjel_default": 'Sejjel Number',
       "submit": 'check',
+      "room": 'Room',
       "google_directions": 'Google Directions'
     },
     "errors": {
       "location_not_found": 'Couldn\'t find location',
       "validation_error": 'Information entered incorrectly. Check for mistakes.'
+    },
+    "about": {
+      "problems": "For comments and information, and in case of any problems, please call 03-903261",
+      "bm": "the Beirut Madinati volunteers",
+      "blurb1": "This is a project by",
+      "blurb2": "Data and code can be found ",
+      "link": "here"
     }
-
   }
 }
