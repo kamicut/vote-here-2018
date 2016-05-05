@@ -22,7 +22,7 @@
     },
     "about": {
       "problems": "لملاحظاتكم و إستفساراتكم، و في حال ورود أي خطأ، يرجى التواصل معنا على ٠٣٩٠٣٢٦١",
-      "blurb1": "هذا المشروع هو مبادرة مستقلة من متطوعي حملة",
+      "blurb1":  "هذا المشروع هو مبادرة مستقلة من متطوعين لبنانيين داعمين لحملة",
       "blurb2": "يمكنكم الحصول على كافة البيانات و المعلومات",
       "bm": "بيروت مدينتي",
       "link": "هنا"
@@ -52,8 +52,8 @@
     },
     "about": {
       "problems": "For comments and information, and in case of any problems, please call 03-903261",
-      "bm": "the Beirut Madinati volunteers",
-      "blurb1": "This is a project by",
+      "bm": "the Beirut Madinati campaign",
+      "blurb1": "This is a project by Lebanese volunteers supporting",
       "blurb2": "Data and code can be found ",
       "link": "here"
     }

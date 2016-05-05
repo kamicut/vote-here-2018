@@ -209,8 +209,8 @@ class App extends Component {
         h('hr'),
         h('footer', {},
           h('div', {}, labels[state.lang].about.problems),
-          h('span', {}, labels[state.lang].about.blurb1),
-          h('a', {'href': "http://beirutmadinati.com", "target": "_blank"}, " " + labels[state.lang].about.bm),
+          h('span', {}, labels[state.lang].about.blurb1 + " "),
+          h('a', {'href': "http://beirutmadinati.com", "target": "_blank"}, labels[state.lang].about.bm),
           h('span', {}, ". " + labels[state.lang].about.blurb2 + " "),
           h('a', {'href': "https://github.com/kamicut/vote-here-2016", "target": "_blank"}, labels[state.lang].about.link)
         )
