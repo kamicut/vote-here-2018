@@ -123,6 +123,7 @@ class App extends Component {
           center: new_location.center,
           location: new_location.info,
           room: new_location.room,
+          kalam: new_location.kalam,
           selected: true,
           error: ''
         });
@@ -176,6 +177,7 @@ class App extends Component {
               (state.lang=== 'ar'
                ? h('p', {}, state.location.NAME_AR)
                : h('p', {}, state.location.NAME_EN)),
+              h('div', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
               h('div', {}, labels[state.lang].labels.room + ' ' + state.room),
               h('a', {
                 href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',

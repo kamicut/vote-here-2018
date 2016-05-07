@@ -14,6 +14,7 @@
       "sejjel_default": 'رقم السجل',
       "submit": 'بحث',
       "room": 'غرفة',
+      "kalam": "رقم القلم",
       "google_directions": 'اتجاهات'
     },
     "errors": {
@@ -38,6 +39,7 @@
       "district": 'District:',
       "district_default": 'Choose a district',
       "gender": 'Gender',
+      "kalam": "Ballot box number",
       "male": 'Male',
       "female": 'Female',
       "sejjel": 'Sejjel Number:',
