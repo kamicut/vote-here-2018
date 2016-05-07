@@ -23,8 +23,9 @@ export default class MapboxMap extends Component {
       this.center = nextProps.center;
       this.map.setFilter('pollingstations', ['==', 'ID', nextProps.id]);
       this.map.setPaintProperty('pollingstations', 'circle-opacity', 1);
-      this.map.setFilter('station_numbers', ['==', 'ID', nextProps.id]);
-      this.map.setPaintProperty('station_numbers', 'text-opacity', 1);
+      // Remove markers for now
+      // this.map.setFilter('station_numbers', ['==', 'ID', nextProps.id]);
+      // this.map.setPaintProperty('station_numbers', 'text-opacity', 1);
     }
   }
 
