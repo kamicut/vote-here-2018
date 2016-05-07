@@ -4,16 +4,16 @@ const labels = require('../i18n.json');
 const districts =  {
   'Achrafieh': 1,
   'Rmeil': 2,
-  'Bachoura': 3,
-  'Saifi': 4,
-  'Mazraaa': 5,
-  'Mina el Hosn': 6,
-  'Mdawar': 7,
-  'Zkak el Blat': 8,
-  'Raas Beirut': 9,
-  'Msaitbe': 10,
-  'Mreisse': 11,
-  'Marfa': 12
+  'Bachoura': 4,
+  'Saifi': 3,
+  'Mazraaa': 7,
+  'Mina el Hosn': 12,
+  'Mdawar': 5,
+  'Zqaq el Blat': 11,
+  'Raas Beirut': 10,
+  'Msaitbe': 8,
+  'Mreisse': 9,
+  'Marfa': 6
 };
 
 const districts_ar = {
@@ -24,7 +24,7 @@ const districts_ar = {
   'المزرعة': 'Mazraaa',
   'ميناء الحصن': 'Mina el Hosn',
   'المدور': 'Mdawar',
-  'زقاق البلاط': 'Zkak el Blat',
+  'زقاق البلاط': 'Zqaq el Blat',
   'رأس بيروت': 'Raas Beirut',
   'المصيطبة': 'Msaitbe',
   'دار المريسة': 'Mreisse',

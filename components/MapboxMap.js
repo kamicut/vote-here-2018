@@ -18,7 +18,7 @@ export default class MapboxMap extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.center) {
+    if (nextProps.center && nextProps.center[0] != 0) {
       this.map.flyTo({center: nextProps.center, zoom: 17});
       this.center = nextProps.center;
       this.map.setFilter('pollingstations', ['==', 'ID', nextProps.id]);

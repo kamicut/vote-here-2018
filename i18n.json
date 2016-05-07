@@ -21,9 +21,9 @@
       "validation_error": 'تم إدخال المعلومات بشكل غير صحيح. تحقق من الأخطاء'
     },
     "about": {
-      "problems": "لملاحظاتكم و إستفساراتكم، و في حال ورود أي خطأ، يرجى التواصل معنا على ٠٣٩٠٣٢٦١",
+      "problems": "تستند المعلومات الواردة هنا على مصادر رسمية مأخوذة من موقع elections.gov.lb، في حال لم تجدوا مركز الاقتراع الخاص بكم او المعلومات الواردة غير صحيحة، راجع مختار منطقتكم فهو يملك آخر المعلومات والبيانات",
       "blurb1":  "هذا المشروع هو مبادرة مستقلة من متطوعين لبنانيين داعمين لحملة",
-      "blurb2": "يمكنكم الحصول على كافة البيانات و المعلومات",
+      "blurb2": " زوروا موقع بيروت مدينتي لمعلومات اكثر عن كيفية التصويت. يمكنك العثور على مصدر البرنامج",
       "bm": "بيروت مدينتي",
       "link": "هنا"
     }
@@ -37,7 +37,7 @@
       "sect_default": 'Choose a sect',
       "district": 'District:',
       "district_default": 'Choose a district',
-      "gender": 'gender',
+      "gender": 'Gender',
       "male": 'Male',
       "female": 'Female',
       "sejjel": 'Sejjel Number:',
@@ -51,10 +51,10 @@
       "validation_error": 'Information entered incorrectly. Check for mistakes.'
     },
     "about": {
-      "problems": "For comments and information, and in case of any problems, please call 03-903261",
+      "problems": "The information posted here is based on official documents obtained from elections.gov.lb If you cannot find your polling station or the information displayed here is different from what you know, please refer to your mayor who should have the most updated information",
       "bm": "the Beirut Madinati campaign",
       "blurb1": "This is a project by Lebanese volunteers supporting",
-      "blurb2": "Data and code can be found ",
+      "blurb2": "Visit the Beirut Madinati website for more information about how to vote. Code can be found ",
       "link": "here"
     }
   }

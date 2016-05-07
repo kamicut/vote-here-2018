@@ -134,7 +134,7 @@ class App extends Component {
     }
     else {
       this.setState({
-        error: labels[lang].errors.validation_error
+        error: labels[lang].errors.location_not_found
       });
     }
   }
