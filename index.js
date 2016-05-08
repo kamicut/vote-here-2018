@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import {h, render, Component} from 'preact';
 import MapboxMap from './components/MapboxMap.js';
 import Form from './components/form.js';
+import {sectArToEn, getSectKey} from './components/SectPicker.js';
 
 const labels = require('./i18n.json');
 
@@ -12,10 +13,11 @@ const labels = require('./i18n.json');
  * @return An index of the polling stations grouped by sect,gender
  */
 function process(json) {
-  console.log(json);
   var index = {};
   json.forEach((item) => {
     let {sect, gender, subdistrict} = item;
+    console.log(sect, sectArToEn(sect));
+    sect = getSectKey(sectArToEn(sect));
     if (!index[sect]) {
       index[sect] = {};
     }
@@ -25,7 +27,7 @@ function process(json) {
     if (!index[sect][subdistrict][gender]) {
       index[sect][subdistrict][gender] = [];
     };
-    index[item.sect][subdistrict][item.gender].push(item);
+    index[sect][subdistrict][gender].push(item);
   });
   return index;
 }

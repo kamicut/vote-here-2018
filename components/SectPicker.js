@@ -24,7 +24,7 @@ const sects =  {
   'Other': 20
 }
 
-const sects_map = {
+const sects_en = {
   'Armenian Orthodox': 'ارمن ارثوذكس',
   'Armenian Catholic': 'ارمن كاثوليك',
   'Israelite': 'اسرائيلي',
@@ -47,9 +47,33 @@ const sects_map = {
   'Other': 'مختلط'
 }
 
+const sects_ar = {};
+for (let key in sects_en) {
+  sects_ar[sects_en[key]] = key;
+}
+const sectKeys = {};
+for (let key in sects) {
+  sectKeys[sects[key]] = key;
+}
+
+export function getSectName(key) {
+  return sectKeys[key];
+}
+
+export function getSectKey(name) {
+  return sects[name];
+}
+
+export function sectArToEn(name) {
+  return sects_ar[name];
+}
+
+export function sectEnToAr(name) {
+  return sects_en[name];
+}
 const SectPicker = ({lang, selected, onChange}) => {
   const mappedOptions = Object.keys(sects).map((option) => {
-    const text = (lang === 'ar'? sects_map[option]:option);
+    const text = (lang === 'ar'? sects_en[option]:option);
     return h('option', {value: sects[option], key: sects[option]}, text);
   });
   return h(
