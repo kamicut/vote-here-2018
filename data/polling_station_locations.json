@@ -1,0 +1,16 @@
+{
+  "1": {
+    "name_en": "Madrid - Embassy Building",
+    "name_ar": "مدريد - مبنى السفارة",
+    "address": "Paseo de la Castellana, 178 Bis 228046 Madrid",
+    "longitude": 40.461040,
+    "latitude": -3.689100
+  },
+  "2": {
+    "name_en": "Bern - Embassy Building",
+    "name_ar": "برن - مبنى السفارة",
+    "address": "Thunstrasse 20, 3074 Muri Bei Bern",
+    "longitude": 46.935483,
+    "latitude": 7.480427
+  }
+}

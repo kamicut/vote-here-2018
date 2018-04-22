@@ -3,8 +3,9 @@ import 'whatwg-fetch';
 import {h, render, Component} from 'preact';
 import MapboxMap from './components/MapboxMap.js';
 import Form from './components/form.js';
-import {sectArToEn, getSectKey} from './components/SectPicker.js';
+// import {sectArToEn, getSectKey} from './components/SectPicker.js';
 
+const countriesData = require('./data/countries.json');
 const labels = require('./i18n.json');
 
 /**
@@ -154,6 +155,25 @@ class App extends Component {
     this.setState({lang: lang});
   }
 
+  setCountry(e) {
+    let country = e.target.value;
+    let data = countriesData[country];
+    let district = null;
+
+    // get the unique districts for the select
+    let districts = data.polling_stations.reduce((arr, station) => {
+      arr = arr.concat(station.districts_ids || []);
+      return arr;
+    }, []);
+    districts = [...new Set(districts)];
+    if (districts.length === 0) {
+      districts = [0];
+      district = 0;
+    }
+
+    this.setState({ country, districts, district })
+  }
+
   render(props, state) {
     console.log('CURRENT_STATE', state);
     return h(
@@ -196,16 +216,13 @@ class App extends Component {
              )
         : h(Form, {
           class: (state.selected? 'hide-form':''),
-          sect: state.sect,
-          gender: state.gender,
-          subdistrict: state.subdistrict,
-          sejjel: state.sejjel,
+          country: state.country,
+          district: state.district,
+          districts: state.districts,
           lang: state.lang,
           actions: {
-            changeSejjel: this.linkState('sejjel'),
-            changeSubdistrict: this.linkState('subdistrict'),
-            changeSect: this.linkState('sect'),
-            changeGender: this.fromGenderPicker.bind(this),
+            changeCountry: this.setCountry.bind(this),
+            changeDistrict: this.linkState('district'),
             submit: this.validateInput.bind(this)
           }
         })),
