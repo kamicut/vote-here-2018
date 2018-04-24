@@ -9,7 +9,6 @@ export default class MapboxMap extends Component {
       // style: 'mapbox://styles/kamicut/cinm462nw001nbom6nnwz899p', //stylesheet location
       style: 'mapbox://styles/kamicut/cinort42e0044btm4ni0q4t5t',
       center: mapCenter,
-      maxBounds: [[35.445671,33.860010],[35.550556,33.920144]],
       zoom: 12.5 // starting zoom
     });
 

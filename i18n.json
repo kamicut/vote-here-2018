@@ -7,13 +7,11 @@
       "country_default": "إختيار البلد",
       "district": "الدائرة الإنتخابية:",
       "district_default": "إختيار الدائرة",
+      "polling_station": "مركز الإقتراع:",
+      "polling_station_default": "إختيار مركز الإقتراع",
       "submit": "بحث",
       "kalam": "رقم القلم",
       "google_directions": "اتجاهات"
-    },
-    "errors": {
-      "location_not_found": "لا نستطيع تحديد موقع",
-      "validation_error": "تم إدخال المعلومات بشكل غير صحيح. تحقق من الأخطاء"
     },
     "about": {
       "problems": "تستند المعلومات الواردة هنا على مصادر رسمية مأخوذة من موقع elections.gov.lb، في حال لم تجدوا مركز الاقتراع الخاص بكم او المعلومات الواردة غير صحيحة، راجع مختار منطقتكم فهو يملك آخر المعلومات والبيانات",
@@ -32,13 +30,11 @@
       "country_default": "Choose a country",
       "district": "District:",
       "district_default": "Choose a district",
+      "polling_station": "Polling station:",
+      "polling_station_default": "Choose a polling station",
       "submit": "check",
       "kalam": "Ballot Box Number",
       "google_directions": "Google Directions"
-    },
-    "errors": {
-      "location_not_found": "Couldn't find location",
-      "validation_error": "Information entered incorrectly. Check for mistakes."
     },
     "about": {
       "problems": "The information posted here is based on official documents obtained from elections.gov.lb If you cannot find your polling station or the information displayed here is different from what you know, please refer to your mayor who should have the most updated information",

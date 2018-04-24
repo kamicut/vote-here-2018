@@ -3,14 +3,30 @@
     "name_en": "Madrid - Embassy Building",
     "name_ar": "مدريد - مبنى السفارة",
     "address": "Paseo de la Castellana, 178 Bis 228046 Madrid",
-    "longitude": 40.461040,
-    "latitude": -3.689100
+    "coordinates": [-3.689100, 40.461040]
   },
   "2": {
     "name_en": "Bern - Embassy Building",
     "name_ar": "برن - مبنى السفارة",
     "address": "Thunstrasse 20, 3074 Muri Bei Bern",
-    "longitude": 46.935483,
-    "latitude": 7.480427
+    "coordinates": [7.480427, 46.935483]
+  },
+  "3": {
+    "name_en": "Omni Shoreham Hotel",
+    "name_ar": "Omni Shoreham Hotel",
+    "address": "2500 Calvert St NW, Washington, DC 20008",
+    "coordinates": [7.480427, 46.935483]
+  },
+  "4": {
+    "name_en": "Sheraton Suites Near the Galleria",
+    "name_ar": "Sheraton Suites Near the Galleria",
+    "address": "2400 West Loop South, Houston, TX 77027",
+    "coordinates": [7.480427, 46.935483]
+  },
+  "5": {
+    "name_en": "Loyola School",
+    "name_ar": "Loyola School",
+    "address": "980 Park Ave., New York, NY 10028",
+    "coordinates": [7.480427, 46.935483]
   }
 }

@@ -3,62 +3,10 @@ import 'whatwg-fetch';
 import {h, render, Component} from 'preact';
 import MapboxMap from './components/MapboxMap.js';
 import Form from './components/form.js';
-// import {sectArToEn, getSectKey} from './components/SectPicker.js';
 
 const countriesData = require('./data/countries.json');
+const locationsData = require('./data/polling_station_locations.json');
 const labels = require('./i18n.json');
-
-/**
- * Processes the polling station data into an index
- * @param {Object[]} json
- * @return An index of the polling stations grouped by sect,gender
- */
-function process(json) {
-  var index = {};
-  json.forEach((item) => {
-    let {sect, gender, subdistrict} = item;
-    console.log(sect, sectArToEn(sect));
-    sect = getSectKey(sectArToEn(sect));
-    if (!index[sect]) {
-      index[sect] = {};
-    }
-    if (!index[sect][subdistrict]) {
-      index[sect][subdistrict] = {};
-    }
-    if (!index[sect][subdistrict][gender]) {
-      index[sect][subdistrict][gender] = [];
-    };
-    index[sect][subdistrict][gender].push(item);
-  });
-  return index;
-}
-
-/**
- * Grabs the subdistrict keys from the geojson and adds it to
- * to the json that will act as an index
- * @param {Object} json
- * @param {Object} geojson
- * @return {Object} Unified JSON
- */
-function join(json, geojson) {
-  var locations = {};
-  var infos = {};
-
-  // TODO make this more efficient
-  geojson.features.forEach((feature) => {
-    var props = feature.properties;
-    locations[props['ID']] = feature.geometry.coordinates;
-    infos[props['ID']] = props;
-  });
-
-  return json.map((row) => {
-    var location = locations[row.place];
-    var info = infos[row.place];
-    return Object.assign({}, row, {
-      center: location, info
-    });
-  });
-}
 
 /**
  * Checks if the entered values exist in the index
@@ -76,75 +24,14 @@ function checkInIndex(index, entry) {
 }
 
 class App extends Component {
-  constructor() {
-    super();
-    var self = this;
-    fetch('data/data.json').then((res) => {
-      return res.json();
-    }).then((json) => {
-      fetch('data/pollingstations.geojson').then( (res) => {
-        return res.json();
-      }).then( (geojson) => {
-        self.geo = geojson;
-        self.data = process(join(json, geojson));
-      });
-    });
-  }
-
   getInitialState() {
     return {
       center: null,
       error: '',
       selected: false,
-      lang: 'ar'
+      lang: 'ar',
+      locations: []
     };
-  }
-
-  validateInput(e) {
-    e.preventDefault();
-    let {sect, subdistrict, gender, sejjel, lang} = this.state;
-
-    var valid = true;
-
-    valid = valid && sect && !isNaN(sect);
-    valid = valid && subdistrict && !isNaN(subdistrict);
-    valid = valid && sejjel && !isNaN(sejjel);
-    valid = valid && gender && (gender === 'M' || gender === 'F');
-
-    if (valid) {
-      var locations = checkInIndex(this.data, {
-        sect: Number(sect),
-        subdistrict: Number(subdistrict),
-        gender: gender,
-        val: sejjel
-      });
-      if (locations.length > 0) {
-        console.log(locations);
-        // Take the first one for now
-        let new_location = locations[0];
-        this.setState({
-          center: new_location.center,
-          location: new_location.info,
-          room: new_location.room,
-          kalam: new_location.kalam,
-          selected: true,
-          error: ''
-        });
-      } else {
-        this.setState({
-          error: labels[lang].errors.location_not_found
-        });
-      }
-    }
-    else {
-      this.setState({
-        error: labels[lang].errors.location_not_found
-      });
-    }
-  }
-
-  fromGenderPicker(value) {
-    this.setState({gender: value});
   }
 
   returnToForm() {
@@ -156,29 +43,82 @@ class App extends Component {
   }
 
   setCountry(e) {
-    let country = e.target.value;
-    let data = countriesData[country];
-    let district = null;
+    let countryId = +e.target.value;
+    let data = countriesData[countryId];
+    let districtId = null;
 
     // get the unique districts for the select
     let districts = data.polling_stations.reduce((arr, station) => {
       arr = arr.concat(station.districts_ids || []);
       return arr;
     }, []);
+
     districts = [...new Set(districts)];
-    if (districts.length === 0) {
-      districts = [0];
-      district = 0;
+
+    if (districts && districts.length === 1) {
+      districtId = districts[0];
     }
 
-    this.setState({ country, districts, district })
+    this.setState({ countryId, districts, locations: [] });
+    this.setDistrict({ target: { value: districtId }});
+  }
+
+  setDistrict(e) {
+    let districtId = e.target.value;
+    if (districtId == null) {
+      this.setState({ districtId });
+      return;
+    }
+    districtId = +districtId;
+    let country = countriesData[this.state.countryId];
+    let locationId = null;
+    let locations = country.polling_stations.reduce((arr, station) => {
+      if (station.districts_ids.indexOf(+districtId) !== -1 || station.districts_ids.indexOf(0) !== -1) {
+        arr.push(station.location_id);
+      }
+      return arr;
+    }, []);
+
+    locations = [...new Set(locations)];
+
+    if (locations && locations.length === 1) {
+      locationId = locations[0];
+    }
+
+    this.setState({ locations, districtId });
+    this.setLocation({ target: { value: locationId }});
+  }
+
+  setLocation(e) {
+    let locationId = e.target.value;
+    if (locationId == null) {
+      this.setState({ location: null, locationId });
+      return;
+    }
+    locationId = +locationId;
+
+    this.setState({ locationId });
+  }
+
+  submitForm() {
+    let location = locationsData[this.state.locationId];
+    let kalam = countriesData[this.state.countryId].polling_stations
+      .find(station => station.location_id === this.state.locationId && station.districts_ids.indexOf(+this.state.districtId) !== -1)
+      .kalam
+
+    this.setState({
+      location,
+      center: location.coordinates,
+      kalam,
+      selected: true
+    });
   }
 
   render(props, state) {
     console.log('CURRENT_STATE', state);
     return h(
       'div', {id: 'app'},
-      h(MapboxMap, {center: state.center, id: (state.location && state.location.ID) || 0}),
+      h(MapboxMap, {center: state.center, id: (state.location && state.location.id) || 0}),
       h('div', {id: 'main', class: (state.lang === 'ar'?'':'override')},
         h('header',
           {id: 'lang-selector'},
@@ -197,10 +137,9 @@ class App extends Component {
             id: 'form'
           },
               (state.lang=== 'ar'
-               ? h('p', {}, state.location.NAME_AR)
-               : h('p', {}, state.location.NAME_EN)),
+               ? h('p', {}, state.location.name_ar)
+               : h('p', {}, state.location.name_en)),
               h('div', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
-              h('div', {}, labels[state.lang].labels.room + ' ' + state.room),
               h('a', {
                 href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
                 target: '_blank'
@@ -216,14 +155,17 @@ class App extends Component {
              )
         : h(Form, {
           class: (state.selected? 'hide-form':''),
-          country: state.country,
-          district: state.district,
+          countryId: state.countryId,
+          districtId: state.districtId,
+          locationId: state.locationId,
           districts: state.districts,
+          locations: state.locations,
           lang: state.lang,
           actions: {
             changeCountry: this.setCountry.bind(this),
-            changeDistrict: this.linkState('district'),
-            submit: this.validateInput.bind(this)
+            changeDistrict: this.setDistrict.bind(this),
+            changeLocation: this.setLocation.bind(this),
+            submit: this.submitForm.bind(this)
           }
         })),
         h('div', {id: 'errors'}, state.error),

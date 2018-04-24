@@ -3,7 +3,7 @@
     "name_en": "Spain",
     "name_ar": "مملكة إسبانيا",
     "polling_stations": [
-      { "kalam": 1, "location_id": 1 }
+      { "kalam": 1, "location_id": 1, "districts_ids": [0] }
     ]
   },
   "2": {
@@ -12,6 +12,18 @@
     "polling_stations": [
       { "kalam": 1, "location_id": 2, "districts_ids": [1, 2, 3, 4, 5, 6, 7, 8] },
       { "kalam": 2, "location_id": 2, "districts_ids": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }
+    ]
+  },
+  "3": {
+    "name_en": "United States of America",
+    "name_ar": "الولايات المتحدة الأمريكية",
+    "polling_stations": [
+      { "kalam": 1, "location_id": 3, "districts_ids": [0] },
+      { "kalam": 2, "location_id": 3, "districts_ids": [0] },
+      { "kalam": 1, "location_id": 4, "districts_ids": [0] },
+      { "kalam": 2, "location_id": 4, "districts_ids": [0] },
+      { "kalam": 1, "location_id": 5, "districts_ids": [1, 2, 3, 4, 5, 6, 7, 8] },
+      { "kalam": 2, "location_id": 5, "districts_ids": [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26] }
     ]
   }
 }

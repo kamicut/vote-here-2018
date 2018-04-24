@@ -2,10 +2,11 @@ import {h} from 'preact';
 
 import CountryPicker from './CountryPicker.js';
 import DistrictPicker from './DistrictPicker.js';
+import LocationPicker from './LocationPicker.js';
 
 const labels = require('../i18n.json');
 
-const Form = ({lang, country, districts, district, actions}) => {
+const Form = ({lang, countryId, districts, locations, districtId, locationId, actions}) => {
   return h(
     'div', {id: 'form'},
     h('header', null,
@@ -14,18 +15,26 @@ const Form = ({lang, country, districts, district, actions}) => {
     ),
     h(CountryPicker, {
       onChange: actions.changeCountry,
-      selected: country,
+      selected: countryId,
       lang: lang
     }),
     h('br'),
     h(DistrictPicker, {
       onChange: actions.changeDistrict,
-      selected: district,
+      selected: districtId,
       availableDistricts: districts,
       lang: lang
     }),
     h('br'),
+    h(LocationPicker, {
+      onChange: actions.changeLocation,
+      selected: locationId,
+      locations: locations,
+      lang: lang
+    }),
+    h('br'),
     h('input', {
+      disabled: !locationId,
       type: 'submit',
       value: labels[lang].labels.submit,
       onClick: actions.submit
