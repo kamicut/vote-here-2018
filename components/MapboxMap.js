@@ -6,8 +6,7 @@ export default class MapboxMap extends Component {
     var mapCenter = this.props.center || [35.507126,33.883812];
     this.map = new mapboxgl.Map({
       container: this._map,
-      // style: 'mapbox://styles/kamicut/cinm462nw001nbom6nnwz899p', //stylesheet location
-      style: 'mapbox://styles/kamicut/cinort42e0044btm4ni0q4t5t',
+      style: 'mapbox://styles/kamicut/cjgeial2g001n2rpa4eah1pk4',
       center: mapCenter,
       zoom: 12.5 // starting zoom
     });
