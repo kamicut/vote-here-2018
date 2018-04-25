@@ -141,7 +141,7 @@ class App extends Component {
                : h('p', {}, state.location.name_en)),
               h('div', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
               h('a', {
-                href:'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
+                href: state.location.google_maps_link,
                 target: '_blank'
               },
                 labels[state.lang].labels.google_directions
