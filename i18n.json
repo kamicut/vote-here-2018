@@ -23,8 +23,8 @@
     "title": "Where do I vote if I live abroad?",
     "subtitle": "Parliamentary elections in Lebanon 2018",
     "labels": {
-      "country": "Country",
-      "country_default": "I currently live in:",
+      "country": "I currently live in:",
+      "country_default": "Country",
       "district": "In Lebanon I am reegistered in:",
       "district_default": "Choose a district",
       "polling_station": "Select the polling center closest to you",
