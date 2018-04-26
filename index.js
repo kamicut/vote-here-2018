@@ -135,7 +135,10 @@ class App extends Component {
           ? h('div', {
             id: 'form'
           },
-              (state.lang=== 'ar'
+            h('div', {}, labels[state.lang].check_your_status,
+              h('a', { 'href': "http://www.dgps.gov.lb/goelect2/index.php", "target": "_blank" }, labels[state.lang].about.link)
+            ),
+              (state.lang === 'ar'
                ? h('p', {}, state.location.name_ar)
                : h('p', {}, state.location.name_en)),
               h('div', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),

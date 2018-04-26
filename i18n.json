@@ -11,7 +11,8 @@
       "polling_station_default": "إختيار مركز الإقتراع",
       "submit": "ابحث عن الموقع",
       "kalam": "رقم القلم",
-      "google_directions": "اتجاهات"
+      "google_directions": "اتجاهات",
+      "check_your_status": "سيتم السماح فقط للناخبين المسجلين بالتصويت. ولذلك ، عليكم التحقق من التسجيل قبل التوجه إلى أقرب مركز اقتراع."
     },
     "about": {
       "problems": "هذا المشروع هو مبادرة مستقلة من متطوعين لبنانيين. يمكنكم الحصول على كافة البيانات و المعلومات",
@@ -24,14 +25,15 @@
     "subtitle": "Parliamentary elections in Lebanon 2018",
     "labels": {
       "country": "I currently live in:",
-      "country_default": "Country",
-      "district": "In Lebanon I am registered in:",
+      "country_default": "Choose a country",
+      "district": "In Lebanon, I am registered in:",
       "district_default": "Choose a district",
       "polling_station": "Select the polling center closest to you",
       "polling_station_default": "Choose a polling station",
       "submit": "Check Location",
       "kalam": "Polling Station Number",
-      "google_directions": "Google Directions"
+      "google_directions": "Google Directions",
+      "check_your_status": "Note: Only registered voters will be allowed to vote. Accordingly, check your registration status before heading to the nearest polling center: "
     },
     "about": {
       "problems": "This is a project by a group of independent Lebanese volunteers. Data and code can be found",
