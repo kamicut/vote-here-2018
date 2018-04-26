@@ -173,7 +173,7 @@ class App extends Component {
         h('footer', {},
           h('div', {}, labels[state.lang].about.problems,
           h('span', {}, ' '),
-          h('a', {'href': "https://github.com/kamicut/vote-here-2016", "target": "_blank"}, labels[state.lang].about.link)
+          h('a', {'href': "https://github.com/kamicut/vote-here-2018", "target": "_blank"}, labels[state.lang].about.link)
         ),
         )
        )

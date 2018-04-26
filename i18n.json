@@ -1,15 +1,15 @@
 {
   "ar": {
-    "title": "أين أنتخب؟",
+    "title": "اين يمكنني ان اقترع اذا كنت مقيماً خارج لبنان؟",
     "subtitle": "الإنتخابات النيابية في لبنان ٢٠١٨",
     "labels": {
-      "country": "البلد:",
+      "country": "انا اقيم حالياً في:",
       "country_default": "إختيار البلد",
-      "district": "الدائرة الإنتخابية:",
+      "district": "في لبنان انا مسجل في الدائرة:",
       "district_default": "إختيار الدائرة",
-      "polling_station": "مركز الإقتراع:",
+      "polling_station": "إختر اقرب مركز للاقتراع لك",
       "polling_station_default": "إختيار مركز الإقتراع",
-      "submit": "بحث",
+      "submit": "ابحث عن الموقع",
       "kalam": "رقم القلم",
       "google_directions": "اتجاهات"
     },
@@ -20,17 +20,17 @@
 
   },
   "en": {
-    "title": "Where do I vote?",
+    "title": "Where do I vote if I live abroad?",
     "subtitle": "Parliamentary elections in Lebanon 2018",
     "labels": {
       "country": "Country",
-      "country_default": "Choose a country",
-      "district": "District:",
+      "country_default": "I currently live in:",
+      "district": "In Lebanon I am reegistered in:",
       "district_default": "Choose a district",
-      "polling_station": "Polling station:",
+      "polling_station": "Select the polling center closest to you",
       "polling_station_default": "Choose a polling station",
-      "submit": "check",
-      "kalam": "Ballot Box Number",
+      "submit": "Check Location",
+      "kalam": "Polling Station Number",
       "google_directions": "Google Directions"
     },
     "about": {
