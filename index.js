@@ -115,6 +115,7 @@ class App extends Component {
   }
 
   render(props, state) {
+    console.log(state.location);
     return h(
       'div', {id: 'app'},
       h(MapboxMap, {center: state.center, id: (state.location && state.location.id) || 0}),
@@ -140,7 +141,7 @@ class App extends Component {
                : h('p', {}, state.location.name_en)),
               h('div', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
               h('a', {
-                href: state.location.google_maps_link,
+                href: state.location.google_maps_links,
                 target: '_blank'
               },
                 labels[state.lang].labels.google_directions
@@ -170,8 +171,10 @@ class App extends Component {
         h('div', {id: 'errors'}, state.error),
         h('hr'),
         h('footer', {},
-          h('div', {}, labels[state.lang].about.problems),
+          h('div', {}, labels[state.lang].about.problems,
+          h('span', {}, ' '),
           h('a', {'href': "https://github.com/kamicut/vote-here-2016", "target": "_blank"}, labels[state.lang].about.link)
+        ),
         )
        )
     );

@@ -19,11 +19,6 @@ export default class MapboxMap extends Component {
     if (nextProps.center && nextProps.center[0] != 0) {
       this.map.flyTo({center: nextProps.center, zoom: 17});
       this.center = nextProps.center;
-      this.map.setFilter('pollingstations', ['==', 'ID', nextProps.id]);
-      this.map.setPaintProperty('pollingstations', 'circle-opacity', 1);
-      // Remove markers for now
-      // this.map.setFilter('station_numbers', ['==', 'ID', nextProps.id]);
-      // this.map.setPaintProperty('station_numbers', 'text-opacity', 1);
     }
   }
 
