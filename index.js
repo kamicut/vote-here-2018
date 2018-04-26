@@ -135,7 +135,8 @@ class App extends Component {
           ? h('div', {
             id: 'form'
           },
-            h('div', {}, labels[state.lang].check_your_status,
+            h('div', {}, labels[state.lang].labels.check_your_status,
+              ': ',
               h('a', { 'href': "http://www.dgps.gov.lb/goelect2/index.php", "target": "_blank" }, labels[state.lang].about.link)
             ),
               (state.lang === 'ar'
