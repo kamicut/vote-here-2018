@@ -14,10 +14,7 @@
       "google_directions": "اتجاهات"
     },
     "about": {
-      "problems": "تستند المعلومات الواردة هنا على مصادر رسمية مأخوذة من موقع elections.gov.lb، في حال لم تجدوا مركز الاقتراع الخاص بكم او المعلومات الواردة غير صحيحة، راجع مختار منطقتكم فهو يملك آخر المعلومات والبيانات",
-      "blurb1":  "هذا المشروع هو مبادرة مستقلة من متطوعين لبنانيين داعمين لحملة",
-      "blurb2": " زوروا موقع بيروت مدينتي لمعلومات اكثر عن كيفية التصويت. يمكنك العثور على مصدر البرنامج",
-      "bm": "بيروت مدينتي",
+      "problems": "هذا المشروع هو مبادرة مستقلة من متطوعين لبنانيين. يمكنكم الحصول على كافة البيانات و المعلومات",
       "link": "هنا"
     }
 
@@ -37,10 +34,7 @@
       "google_directions": "Google Directions"
     },
     "about": {
-      "problems": "The information posted here is based on official documents obtained from elections.gov.lb If you cannot find your polling station or the information displayed here is different from what you know, please refer to your mayor who should have the most updated information",
-      "bm": "the Beirut Madinati campaign",
-      "blurb1": "This is a project by Lebanese volunteers supporting",
-      "blurb2": "Visit the Beirut Madinati website for more information about how to vote. Code can be found ",
+      "problems": "This is a project by a group of independent Lebanese volunteers. Data and code can be found",
       "link": "here"
     }
   }

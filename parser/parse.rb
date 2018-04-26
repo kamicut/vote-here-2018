@@ -10,27 +10,27 @@ data.each do |row|
   if !countries[row["country"]]
     countries[row["country"]] = {
       id: countries.size + 1,
-      name_en: row["country"],
-      name_ar: row["country"],
+      name_en: row["country_en"],
+      name_ar: row["country_ar"],
       polling_stations: []
     }
   end
 
-  if !polling_station_locations[row["polling_station"]]
-    polling_station_locations[row["polling_station"]] = {
+  if !polling_station_locations[row["polling_station_en"]]
+    polling_station_locations[row["polling_station_en"]] = {
       id: polling_station_locations.size + 1,
-      name_en: row["polling_station"],
-      name_ar: row["polling_station"],
+      name_en: row["polling_station_en"],
+      name_ar: row["polling_station_ar"],
       address: row["address"],
       coordinates: [row["long"], row["lat"]],
-      google_maps_link: row["google_maps_link"]
+      google_maps_links: row["google_maps_links"]
     }
   end
 
   countries[row["country"]][:polling_stations] << {
     kalam: row["kalam"],
-    location_id: polling_station_locations[row["polling_station"]][:id],
-    districts_ids: row["districts"].gsub("-", " ").gsub("–", " ").split.map!(&:to_i)
+    location_id: polling_station_locations[row["polling_station_en"]][:id],
+    districts_ids: row["districs"].gsub("-", " ").gsub("–", " ").split.map!(&:to_i)
   }
 end
 
