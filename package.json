@@ -35,6 +35,7 @@
   },
   "homepage": "https://github.com/kamicut/vote-here-2016#readme",
   "dependencies": {
+    "lodash.sortby": "^4.7.0",
     "preact": "^4.8.0",
     "whatwg-fetch": "^1.0.0"
   },

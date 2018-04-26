@@ -1,21 +1,14 @@
 import {h} from 'preact';
 const labels = require('../i18n.json');
 const countries = require('../data/countries.json');
+const sortBy = require('lodash.sortby');
 
 function countrySorter(lang) {
-  return (a,b) => {
-    let nameA = countries[a][`name_${lang}`];
-    let nameB = countries[b][`name_${lang}`];
-
-    if (nameA > nameB) return 1;
-    if (nameB < nameA) return -1;
-    return 0;
-
-  }
+  return o => countries[+o][`name_${lang}`];
 }
 
 const CountryPicker = ({lang, selected, onChange}) => {
-  const mappedOptions = Object.keys(countries).sort(countrySorter(lang)).map(id =>
+  const mappedOptions = sortBy(Object.keys(countries), countrySorter(lang)).map(id =>
     h('option', { value: id, key: id }, countries[id][`name_${lang}`])
   );
 

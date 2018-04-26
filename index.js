@@ -102,6 +102,8 @@ class App extends Component {
 
   submitForm() {
     let location = locationsData[this.state.locationId];
+    console.log(countriesData[this.state.countryId].polling_stations, this.state.locationId, this.state.districtId);
+
     let kalam = countriesData[this.state.countryId].polling_stations
       .find(station => station.location_id === this.state.locationId && station.districts_ids.indexOf(+this.state.districtId) !== -1)
       .kalam

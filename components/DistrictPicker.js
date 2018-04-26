@@ -1,21 +1,14 @@
 import {h} from 'preact';
 const labels = require('../i18n.json');
 const districts = require('../data/districts.json');
+const sortBy = require('lodash.sortby');
 
 function districtSorter(lang) {
-  return (a,b) => {
-    let nameA = districts[a][`name_${lang}`];
-    let nameB = districts[b][`name_${lang}`];
-
-    if (nameA > nameB) return 1;
-    if (nameB < nameA) return -1;
-    return 0;
-
-  }
+  return o => districts[+o][`name_${lang}`];
 }
 
 const DistrictPicker = ({ lang, selected, availableDistricts, onChange }) => {
-  const mappedOptions = (availableDistricts || []).sort(districtSorter(lang)).map(id =>
+  const mappedOptions = sortBy(availableDistricts || [], districtSorter(lang)).map(id =>
     h('option', { value: id, key: id }, districts[id][`name_${lang}`])
   );
 
