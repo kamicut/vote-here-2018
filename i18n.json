@@ -25,7 +25,7 @@
     "labels": {
       "country": "I currently live in:",
       "country_default": "Country",
-      "district": "In Lebanon I am reegistered in:",
+      "district": "In Lebanon I am registered in:",
       "district_default": "Choose a district",
       "polling_station": "Select the polling center closest to you",
       "polling_station_default": "Choose a polling station",
