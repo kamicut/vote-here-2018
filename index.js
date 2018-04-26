@@ -53,9 +53,14 @@ class App extends Component {
       return arr;
     }, []);
 
+    // Remove district 0
+    districts = districts.filter(d => d !== 0);
+
     districts = [...new Set(districts)];
 
-    if (districts && districts.length === 1) {
+    if (districts.length == 0) {
+      // Add district 0 - All districts
+      districts.push(0); 
       districtId = districts[0];
     }
 
@@ -102,10 +107,11 @@ class App extends Component {
 
   submitForm() {
     let location = locationsData[this.state.locationId];
-    console.log(countriesData[this.state.countryId].polling_stations, this.state.locationId, this.state.districtId);
 
     let kalam = countriesData[this.state.countryId].polling_stations
-      .find(station => station.location_id === this.state.locationId && station.districts_ids.indexOf(+this.state.districtId) !== -1)
+      .find(station => station.location_id === this.state.locationId && 
+        (station.districts_ids.indexOf(+this.state.districtId) !== -1 || station.districts_ids.indexOf(0) !== -1)
+      )
       .kalam
 
     this.setState({
