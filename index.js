@@ -162,10 +162,12 @@ class App extends Component {
             (state.lang === 'ar'
               ? h('h2', {}, state.location.name_ar)
               : h('h2', {}, state.location.name_en)),
+            h('h3', {}, state.location.address),
             h('h3', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
             h('a', {
               href: state.location.google_maps_links,
-              target: '_blank'
+              target: '_blank',
+              style: { 'font-size': '18px'}
             },
               labels[state.lang].labels.google_directions
             )
