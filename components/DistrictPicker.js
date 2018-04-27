@@ -17,6 +17,7 @@ const DistrictPicker = ({ lang, selected, availableDistricts, onChange }) => {
     h('label', {}, labels[lang].labels.district),
     h('br'),
     h('select', {
+      style: { direction: lang === 'ar'? 'rtl': 'ltr' },
       onChange: onChange,
       value: selected
     },

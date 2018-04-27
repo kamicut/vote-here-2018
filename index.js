@@ -126,68 +126,81 @@ class App extends Component {
     return h(
       'div', {id: 'app'},
       h(MapboxMap, {center: state.center, id: (state.location && state.location.id) || 0}),
-      h('div', {id: 'main', class: (state.lang === 'ar'?'':'override')},
-        h('header',
-          {id: 'lang-selector'},
-          h('a', {
-            class: 'lang-btn' + (state.lang === 'ar'? ' lang-btn-bold':''),
-            onClick: this.setLang.bind(this, 'ar')
-          }, 'AR'),
-          ' | ',
-          h('a', {
-            class: 'lang-btn' + (state.lang === 'en'? ' lang-btn-bold':''),
-            onClick: this.setLang.bind(this, 'en')
-          }, 'EN')
-         ),
+      h('div', { id: 'main', class: (state.lang === 'ar' ? '' : 'override') },
+        h('header', {class: 'nav'},
+          h('div',
+            { id: 'lang-selector' },
+            h('a', {
+              class: 'lang-btn' + (state.lang === 'ar' ? ' lang-btn-bold' : ''),
+              onClick: this.setLang.bind(this, 'ar')
+            }, 'AR'),
+            ' | ',
+            h('a', {
+              class: 'lang-btn' + (state.lang === 'en' ? ' lang-btn-bold' : ''),
+              onClick: this.setLang.bind(this, 'en')
+            }, 'EN'),
+          ),
+          (state.selected ?
+            h('input', {
+              style: {
+                display: 'inline-block',
+                float: 'right',
+                right: 0
+              },
+              type: 'submit',
+              value: 'back',
+              onClick: this.returnToForm.bind(this)
+            })
+            :
+            h('div')
+          )
+        ),
         (state.selected
           ? h('div', {
             id: 'form'
           },
+            (state.lang === 'ar'
+              ? h('h2', {}, state.location.name_ar)
+              : h('h2', {}, state.location.name_en)),
+            h('h3', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
+            h('a', {
+              href: state.location.google_maps_links,
+              target: '_blank'
+            },
+              labels[state.lang].labels.google_directions
+            )
+          )
+          : h(Form, {
+            class: (state.selected ? 'hide-form' : ''),
+            countryId: state.countryId,
+            districtId: state.districtId,
+            locationId: state.locationId,
+            districts: state.districts,
+            locations: state.locations,
+            lang: state.lang,
+            actions: {
+              changeCountry: this.setCountry.bind(this),
+              changeDistrict: this.setDistrict.bind(this),
+              changeLocation: this.setLocation.bind(this),
+              submit: this.submitForm.bind(this)
+            }
+          })),
+        h('div', { id: 'errors' }, state.error),
+        (!state.selected ?
+          h('footer', {},
+            h('hr'),
             h('div', {}, labels[state.lang].labels.check_your_status,
               ': ',
               h('a', { 'href': "http://www.dgps.gov.lb/goelect2/index.php", "target": "_blank" }, labels[state.lang].about.link)
             ),
-              (state.lang === 'ar'
-               ? h('p', {}, state.location.name_ar)
-               : h('p', {}, state.location.name_en)),
-              h('div', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
-              h('a', {
-                href: state.location.google_maps_links,
-                target: '_blank'
-              },
-                labels[state.lang].labels.google_directions
-               ),
-              h('br'),
-              h('input', {
-                type: 'submit',
-                value: 'back',
-                onClick: this.returnToForm.bind(this)
-              })
-             )
-        : h(Form, {
-          class: (state.selected? 'hide-form':''),
-          countryId: state.countryId,
-          districtId: state.districtId,
-          locationId: state.locationId,
-          districts: state.districts,
-          locations: state.locations,
-          lang: state.lang,
-          actions: {
-            changeCountry: this.setCountry.bind(this),
-            changeDistrict: this.setDistrict.bind(this),
-            changeLocation: this.setLocation.bind(this),
-            submit: this.submitForm.bind(this)
-          }
-        })),
-        h('div', {id: 'errors'}, state.error),
-        h('hr'),
-        h('footer', {},
-          h('div', {}, labels[state.lang].about.problems,
-          h('span', {}, ' '),
-          h('a', {'href': "https://github.com/kamicut/vote-here-2018", "target": "_blank"}, labels[state.lang].about.link)
-        ),
+            h('br'),
+            h('div', {}, labels[state.lang].about.problems,
+              h('span', {}, ' '),
+              h('a', { 'href': "https://github.com/kamicut/vote-here-2018", "target": "_blank" }, labels[state.lang].about.link)
+            ),
+          ) : h('div')
         )
-       )
+      )
     );
   }
 }

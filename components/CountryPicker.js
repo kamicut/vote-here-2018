@@ -17,6 +17,7 @@ const CountryPicker = ({lang, selected, onChange}) => {
     h('label', {}, labels[lang].labels.country),
     h('br'),
     h('select', {
+      style: { direction: lang === 'ar'? 'rtl': 'ltr' },
       onChange: onChange,
       value: selected
     },

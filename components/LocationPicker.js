@@ -12,6 +12,7 @@ const LocationPicker = ({lang, selected, locations, onChange}) => {
     h('label', {}, labels[lang].labels.polling_station),
     h('br'),
     h('select', {
+      style: { direction: lang === 'ar'? 'rtl': 'ltr' },
       onChange: onChange,
       value: selected
     },
