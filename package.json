@@ -17,11 +17,6 @@
     "type": "git",
     "url": "git+https://github.com/kamicut/vote-here-2016.git"
   },
-  "transform": [
-    [
-      "babelify"
-    ]
-  ],
   "keywords": [
     "vote",
     "polling",
@@ -36,7 +31,8 @@
   "homepage": "https://github.com/kamicut/vote-here-2016#readme",
   "dependencies": {
     "lodash.sortby": "^4.7.0",
-    "preact": "^4.8.0",
+    "preact": "8.2.9",
+    "preact-router": "^2.6.0",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

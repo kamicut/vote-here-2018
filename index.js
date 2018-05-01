@@ -2,11 +2,10 @@ import 'whatwg-fetch';
 
 import {h, render, Component} from 'preact';
 import MapboxMap from './components/MapboxMap.js';
-import Form from './components/form.js';
-
-const countriesData = require('./data/countries.json');
-const locationsData = require('./data/polling_station_locations.json');
-const labels = require('./i18n.json');
+import Nav from './components/Nav';
+import Router, {Match} from 'preact-router';
+import GlobalForm from './containers/GlobalForm';
+import labels from './i18n.json';
 
 /**
  * Checks if the entered values exist in the index
@@ -23,14 +22,14 @@ function checkInIndex(index, entry) {
   });
 }
 
+
 class App extends Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props)
+    this.state = {
       center: null,
       error: '',
-      selected: false,
       lang: 'ar',
-      locations: []
     };
   }
 
@@ -42,151 +41,19 @@ class App extends Component {
     this.setState({lang: lang});
   }
 
-  setCountry(e) {
-    let countryId = +e.target.value;
-    let data = countriesData[countryId];
-    let districtId = null;
-
-    // get the unique districts for the select
-    let districts = data.polling_stations.reduce((arr, station) => {
-      arr = arr.concat(station.districts_ids || []);
-      return arr;
-    }, []);
-
-    // Remove district 0
-    districts = districts.filter(d => d !== 0);
-
-    districts = [...new Set(districts)];
-
-    if (districts.length == 0) {
-      // Add district 0 - All districts
-      districts.push(0); 
-      districtId = districts[0];
-    }
-
-    this.setState({ countryId, districts, locations: [] });
-    this.setDistrict({ target: { value: districtId }});
-  }
-
-  setDistrict(e) {
-    let districtId = e.target.value;
-    if (districtId == null) {
-      this.setState({ districtId });
-      return;
-    }
-    districtId = +districtId;
-    let country = countriesData[this.state.countryId];
-    let locationId = null;
-    let locations = country.polling_stations.reduce((arr, station) => {
-      if (station.districts_ids.indexOf(+districtId) !== -1 || station.districts_ids.indexOf(0) !== -1) {
-        arr.push(station.location_id);
-      }
-      return arr;
-    }, []);
-
-    locations = [...new Set(locations)];
-
-    if (locations && locations.length === 1) {
-      locationId = locations[0];
-    }
-
-    this.setState({ locations, districtId });
-    this.setLocation({ target: { value: locationId }});
-  }
-
-  setLocation(e) {
-    let locationId = e.target.value;
-    if (locationId == null) {
-      this.setState({ location: null, locationId });
-      return;
-    }
-    locationId = +locationId;
-
-    this.setState({ locationId });
-  }
-
-  submitForm() {
-    let location = locationsData[this.state.locationId];
-
-    let kalam = countriesData[this.state.countryId].polling_stations
-      .find(station => station.location_id === this.state.locationId && 
-        (station.districts_ids.indexOf(+this.state.districtId) !== -1 || station.districts_ids.indexOf(0) !== -1)
-      )
-      .kalam
-
+  setCoordinates(center) {
     this.setState({
-      location,
-      center: location.coordinates,
-      kalam,
-      selected: true
+      center
     });
   }
 
   render(props, state) {
     return h(
-      'div', {id: 'app'},
-      h(MapboxMap, {center: state.center, id: (state.location && state.location.id) || 0}),
+      'div', { id: 'app' },
+      h(MapboxMap, { center: state.center }),
       h('div', { id: 'main', class: (state.lang === 'ar' ? '' : 'override') },
-        h('header', {class: 'nav'},
-          h('div',
-            { id: 'lang-selector' },
-            h('a', {
-              class: 'lang-btn' + (state.lang === 'ar' ? ' lang-btn-bold' : ''),
-              onClick: this.setLang.bind(this, 'ar')
-            }, 'AR'),
-            ' | ',
-            h('a', {
-              class: 'lang-btn' + (state.lang === 'en' ? ' lang-btn-bold' : ''),
-              onClick: this.setLang.bind(this, 'en')
-            }, 'EN'),
-          ),
-          (state.selected ?
-            h('input', {
-              style: {
-                display: 'inline-block',
-                float: 'right',
-                right: 0
-              },
-              type: 'submit',
-              value: 'back',
-              onClick: this.returnToForm.bind(this)
-            })
-            :
-            h('div')
-          )
-        ),
-        (state.selected
-          ? h('div', {
-            id: 'form'
-          },
-            (state.lang === 'ar'
-              ? h('h2', {}, state.location.name_ar)
-              : h('h2', {}, state.location.name_en)),
-            h('h3', {}, state.location.address),
-            h('h3', {}, labels[state.lang].labels.kalam + ' ' + state.kalam),
-            h('a', {
-              href: state.location.google_maps_links,
-              target: '_blank',
-              style: { 'font-size': '18px'}
-            },
-              labels[state.lang].labels.google_directions
-            )
-          )
-          : h(Form, {
-            class: (state.selected ? 'hide-form' : ''),
-            countryId: state.countryId,
-            districtId: state.districtId,
-            locationId: state.locationId,
-            districts: state.districts,
-            locations: state.locations,
-            lang: state.lang,
-            actions: {
-              changeCountry: this.setCountry.bind(this),
-              changeDistrict: this.setDistrict.bind(this),
-              changeLocation: this.setLocation.bind(this),
-              submit: this.submitForm.bind(this)
-            }
-          })),
+        h(Nav, { lang: state.lang, setLang: this.setLang.bind(this)}),
+        h(GlobalForm, {id: 'global-form', lang: state.lang, setCoordinates: this.setCoordinates.bind(this)}),
         h('div', { id: 'errors' }, state.error),
         (!state.selected ?
           h('footer', {},

@@ -2135,9 +2135,13 @@ plur@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/plur/-/plur-1.0.0.tgz#db85c6814f5e5e5a3b49efc28d604fec62975156"
 
-preact@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-4.8.0.tgz#4d0eebaab485255603fd4de8fdb1c22a80997844"
+preact-router@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/preact-router/-/preact-router-2.6.0.tgz#55f7fbc84e6b8af0df3ea04c8ce4c268714089b6"
+
+preact@8.2.9:
+  version "8.2.9"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-8.2.9.tgz#813ba9dd45e5d97c5ea0d6c86d375b3be711cc40"
 
 preserve@^0.2.0:
   version "0.2.0"
