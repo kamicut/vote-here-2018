@@ -1,5 +1,5 @@
 import {h, Component} from 'preact';
-import Form from '../components/form.js';
+import Form from '../components/GlobalForm.js';
 import countriesData from '../data/countries.json';
 import locationsData from '../data/polling_station_locations.json';
 import labels from '../i18n.json';
@@ -31,7 +31,7 @@ export default class GlobalForm extends Component {
 
     if (districts.length == 0) {
       // Add district 0 - All districts
-      districts.push(0); 
+      districts.push(0);
       districtId = districts[0];
     }
 
@@ -80,7 +80,7 @@ export default class GlobalForm extends Component {
     let location = locationsData[this.state.locationId];
 
     let kalam = countriesData[this.state.countryId].polling_stations
-      .find(station => station.location_id === this.state.locationId && 
+      .find(station => station.location_id === this.state.locationId &&
         (station.districts_ids.indexOf(+this.state.districtId) !== -1 || station.districts_ids.indexOf(0) !== -1)
       )
       .kalam

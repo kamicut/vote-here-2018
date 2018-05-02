@@ -5,6 +5,7 @@ import MapboxMap from './components/MapboxMap.js';
 import Nav from './components/Nav';
 import Router from 'preact-router';
 import GlobalForm from './containers/GlobalForm';
+import LocalForm from './containers/LocalForm';
 import createHashHistory from 'history/createHashHistory';
 import labels from './i18n.json';
 
@@ -57,6 +58,7 @@ class App extends Component {
         h(Router, {history: createHashHistory()},
           h('div', {path: '/'}, h('h1', {}, 'ROOT')),
           h(GlobalForm, { id: 'global-form', path: '/global', lang: state.lang, setCoordinates: this.setCoordinates.bind(this) }),
+          h(LocalForm, { id: 'local-form', path: '/local', lang: state.lang, setCoordinates: this.setCoordinates.bind(this) }),
         ),
         h('div', { id: 'errors' }, state.error),
         (!state.selected ?
