@@ -1,0 +1,22 @@
+{
+  "1": { "name_en": "Armenian Orthodox", "name_ar": "ارمن ارثوذكس" },
+  "2": { "name_en": "Armenian Catholic", "name_ar": "ارمن كاثوليك" },
+  "3": { "name_en": "Israelite", "name_ar": "اسرائيلي" },
+  "4": { "name_en": "Achouri", "name_ar": "اشوري" },
+  "5": { "name_en": "Achouri Orthodoxe", "name_ar": "اشوري ارثوذكس" },
+  "6": { "name_en": "Evangelical", "name_ar": "انجيلي" },
+  "7": { "name_en": "Druze", "name_ar": "درزي" },
+  "8": { "name_en": "Greek Orthodox", "name_ar": "روم ارثوذكس" },
+  "9": { "name_en": "Greek Catholic", "name_ar": "روم كاثوليك" },
+  "10": { "name_en": "Syriac Orthodox", "name_ar": "سريان ارثوذكس" },
+  "11": { "name_en": "Syriac Catholic", "name_ar": "سريان كاثوليك" },
+  "12": { "name_en": "Sunni", "name_ar": "سني" },
+  "13": { "name_en": "Shia", "name_ar": "شيعي" },
+  "14": { "name_en": "Alawite", "name_ar": "علوي" },
+  "15": { "name_en": "Caldan", "name_ar": "كلدان" },
+  "16": { "name_en": "Caldan Orthodoxe", "name_ar": "كلدان ارثوذكس" },
+  "17": { "name_en": "Caldan Catholic", "name_ar": "كلدان كاثوليك" },
+  "18": { "name_en": "Latin", "name_ar": "لاتين" },
+  "19": { "name_en": "Maronite", "name_ar": "ماروني" },
+  "20": { "name_en": "Other", "name_ar": "مختلط" }
+}
