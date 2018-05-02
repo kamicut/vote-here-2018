@@ -3,8 +3,9 @@ import 'whatwg-fetch';
 import {h, render, Component} from 'preact';
 import MapboxMap from './components/MapboxMap.js';
 import Nav from './components/Nav';
-import Router, {Match} from 'preact-router';
+import Router from 'preact-router';
 import GlobalForm from './containers/GlobalForm';
+import createHashHistory from 'history/createHashHistory';
 import labels from './i18n.json';
 
 /**
@@ -53,7 +54,10 @@ class App extends Component {
       h(MapboxMap, { center: state.center }),
       h('div', { id: 'main', class: (state.lang === 'ar' ? '' : 'override') },
         h(Nav, { lang: state.lang, setLang: this.setLang.bind(this)}),
-        h(GlobalForm, {id: 'global-form', lang: state.lang, setCoordinates: this.setCoordinates.bind(this)}),
+        h(Router, {history: createHashHistory()},
+          h('div', {path: '/'}, h('h1', {}, 'ROOT')),
+          h(GlobalForm, { id: 'global-form', path: '/global', lang: state.lang, setCoordinates: this.setCoordinates.bind(this) }),
+        ),
         h('div', { id: 'errors' }, state.error),
         (!state.selected ?
           h('footer', {},
