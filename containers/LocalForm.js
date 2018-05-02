@@ -4,6 +4,8 @@ import countriesData from '../data/countries.json';
 import locationsData from '../data/polling_station_locations.json';
 import labels from '../i18n.json';
 import linkState from 'linkstate';
+import beirut2 from '../data/beirut2.json';
+console.log(beirut2);
 
 export default class LocalForm extends Component {
   constructor(props) {
@@ -72,7 +74,7 @@ export default class LocalForm extends Component {
           h('h3', {}, state.location.address),
           h('h3', {}, labels[lang].labels.kalam + ' ' + state.kalam),
           h('a', {
-            href: state.location.google_maps_links,
+            href: state.location.google_maps_links || 'https://maps.google.com/?q=' + state.center[1] + ',' + state.center[0] + '&t=k',
             target: '_blank',
             style: { 'font-size': '18px' }
           },
