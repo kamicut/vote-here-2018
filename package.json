@@ -1,7 +1,7 @@
 {
-  "name": "vote-here-2016",
-  "version": "0.0.1",
-  "description": "Beirut 2016 Polling Station Map",
+  "name": "vote-here-2018",
+  "version": "1.0.0",
+  "description": "Lebanon 2018 Polling Station Map",
   "main": "index.js",
   "scripts": {
     "start": "budo index.js --live -- -t babelify | garnish",
@@ -26,9 +26,9 @@
   "author": "Marc Farra <marcfarra@gmail.com>",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/kamicut/vote-here-2016/issues"
+    "url": "https://github.com/kamicut/vote-here-2018/issues"
   },
-  "homepage": "https://github.com/kamicut/vote-here-2016#readme",
+  "homepage": "https://github.com/kamicut/vote-here-2018#readme",
   "dependencies": {
     "history": "^4.7.2",
     "linkstate": "^1.1.1",
