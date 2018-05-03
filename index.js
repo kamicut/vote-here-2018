@@ -8,22 +8,7 @@ import GlobalForm from './containers/GlobalForm';
 import LocalForm from './containers/LocalForm';
 import createHashHistory from 'history/createHashHistory';
 import labels from './i18n.json';
-
-/**
- * Checks if the entered values exist in the index
- * @param {Object} index
- * @param {Object} entry
- * @returns {Object[]} list of matching polling stations
- */
-function checkInIndex(index, entry) {
-  let { sect, subdistrict, gender, val } = entry;
-  var fromIndex = index[sect][subdistrict][gender];
-  return fromIndex.filter((row) => {
-    return Number(row.from) <= Number(val) &&
-      Number(val) <= Number(row.to);
-  });
-}
-
+import linkState from 'linkstate';
 
 class App extends Component {
   constructor(props) {
@@ -35,30 +20,28 @@ class App extends Component {
     };
   }
 
-  returnToForm() {
-    this.setState({selected: false});
-  }
-
-  setLang(lang) {
-    this.setState({lang: lang});
-  }
-
-  setCoordinates(center) {
-    this.setState({
-      center
-    });
-  }
-
   render(props, state) {
     return h(
       'div', { id: 'app' },
       h(MapboxMap, { center: state.center }),
       h('div', { id: 'main', class: (state.lang === 'ar' ? '' : 'override') },
-        h(Nav, { lang: state.lang, setLang: this.setLang.bind(this)}),
+        h(Nav, { lang: state.lang, setLang: linkState(this, 'lang')}),
         h(Router, {history: createHashHistory()},
           h('div', {path: '/'}, h('h1', {}, 'ROOT')),
-          h(GlobalForm, { id: 'global-form', path: '/global', lang: state.lang, setCoordinates: this.setCoordinates.bind(this) }),
-          h(LocalForm, { id: 'local-form', path: '/local', lang: state.lang, setCoordinates: this.setCoordinates.bind(this) }),
+          h(GlobalForm, {
+            id: 'global-form',
+            path: '/global',
+            lang: state.lang,
+            setCoordinates: linkState(this, 'center')
+          }),
+          h(LocalForm, {
+            id: 'local-form',
+            path: '/:district',
+            lang: state.lang,
+            center: state.center,
+            setCoordinates: linkState(this, 'center'),
+            changeError: linkState(this, 'error'),
+          }),
         ),
         h('div', { id: 'errors' }, state.error),
         (!state.selected ?

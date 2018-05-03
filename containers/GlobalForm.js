@@ -76,6 +76,10 @@ export default class GlobalForm extends Component {
     this.setState({ locationId });
   }
 
+  returnToForm() {
+    this.setState({ selected: false });
+  }
+
   submitForm() {
     let location = locationsData[this.state.locationId];
 
@@ -111,7 +115,13 @@ export default class GlobalForm extends Component {
             style: { 'font-size': '18px' }
           },
             labels[lang].labels.google_directions
-          )
+          ),
+          h('br'),
+          h('input', {
+            type: 'submit',
+            value: 'back',
+            onClick: this.returnToForm.bind(this)
+          })
         )
         : h(Form, {
           class: (state.selected ? 'hide-form' : ''),

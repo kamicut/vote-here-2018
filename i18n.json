@@ -13,6 +13,7 @@
       "gender": "الجنس:",
       "male": "ذكر",
       "female": "أنثى",
+      "room": "غرفة",
       "sejjel": "رقم السجل:",
       "sejjel_default": "رقم السجل",
       "district": "في لبنان انا مسجل في الدائرة:",
@@ -23,6 +24,10 @@
       "kalam": "رقم القلم",
       "google_directions": "اتجاهات",
       "check_your_status": "سيتم السماح فقط للناخبين المسجلين بالتصويت. ولذلك ، عليكم التحقق من التسجيل قبل التوجه إلى أقرب مركز اقتراع"
+    },
+    "errors": {
+      "location_not_found": "لا نستطيع تحديد موقع",
+      "validation_error": "تم إدخال المعلومات بشكل غير صحيح. تحقق من الأخطاء"
     },
     "about": {
       "problems": "هذا المشروع هو مبادرة مستقلة من متطوعين لبنانيين. يمكنكم الحصول على كافة البيانات و المعلومات",
@@ -44,6 +49,7 @@
       "gender": "Gender",
       "male": "Male",
       "female": "Female",
+      "room": "Room",
       "sejjel": "Sejjel Number:",
       "sejjel_default": "Sejjel Number",
       "district": "In Lebanon, I am registered in:",
@@ -54,6 +60,10 @@
       "kalam": "Polling Station Number",
       "google_directions": "Google Directions",
       "check_your_status": "Note: Only registered voters will be allowed to vote. Accordingly, check your registration status before heading to the nearest polling center"
+    },
+    "errors": {
+      "location_not_found": "Couldn't find location",
+      "validation_error": "Information entered incorrectly. Check for mistakes."
     },
     "about": {
       "problems": "This is a project by a group of independent Lebanese volunteers. Data and code can be found",
