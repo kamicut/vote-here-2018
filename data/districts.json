@@ -1,7 +1,7 @@
 {
   "0":	{ "id": "all_districts", "name_en": "All electoral districts", "name_ar": "كافة الدوائر الانتخابية" },
-  "1":	{ "id": "beirut-1", "name_en": "Beirut 1", "name_ar": "بيروت الأولى" },
-  "2":	{ "id": "beirut-1", "name_en": "Beirut 2", "name_ar": "بيروت الثانية" },
+  "1":	{ "id": "beirut1", "name_en": "Beirut 1", "name_ar": "بيروت الأولى" },
+  "2":	{ "id": "beirut2", "name_en": "Beirut 2", "name_ar": "بيروت الثانية" },
   "3":	{ "id": "chouf", "name_en": "Chouf", "name_ar": "الشوف" },
   "4":	{ "id": "metn", "name_en": "Metn", "name_ar": "المتن" },
   "5":	{ "id": "baabda", "name_en": "Baabda", "name_ar": "بعبدا" },

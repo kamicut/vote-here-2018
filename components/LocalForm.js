@@ -5,14 +5,17 @@ import SejjelInput from './SejjelInput.js';
 import GenderPicker from './GenderPicker.js';
 
 const labels = require('../i18n.json');
+const districts = require('../data/districts.json');
 const sects = require('../data/sects.json');
 
-const Form = ({lang, sect, village, villages, sejjel, gender, actions}) => {
+const Form = ({lang, district, sect, village, villages, sejjel, gender, actions}) => {
+  const districtObj = Object.values(districts).filter(dist => dist.id === district)[0];
+  const name_lang = `name_${lang}`;
   return h(
     'div', {id: 'form'},
     h('header', null,
       h('h1', null, labels[lang].title_local),
-      h('h2', null, labels[lang].subtitle)
+      h('h2', null, `${labels[lang].subtitle} - ${districtObj[name_lang]}`)
      ),
     h(GenericPicker, {
       name: 'sect',

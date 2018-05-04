@@ -3,6 +3,7 @@
     "title": "اين يمكنني ان اقترع اذا كنت مقيماً خارج لبنان؟",
     "title_local": "اين يمكنني ان اقترع؟",
     "subtitle": "الإنتخابات النيابية في لبنان ٢٠١٨",
+    "global": "المغتربين",
     "labels": {
       "country": "انا اقيم حالياً في:",
       "country_default": "إختيار البلد",
@@ -39,6 +40,7 @@
     "title": "Where do I vote if I live abroad?",
     "title_local": "Where do I vote?",
     "subtitle": "Parliamentary elections in Lebanon 2018",
+    "global": "Expats",
     "labels": {
       "country": "I currently live in:",
       "country_default": "Choose a country",

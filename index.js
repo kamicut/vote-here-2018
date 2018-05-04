@@ -9,6 +9,7 @@ import LocalForm from './containers/LocalForm';
 import createHashHistory from 'history/createHashHistory';
 import labels from './i18n.json';
 import linkState from 'linkstate';
+import districts from './data/districts.json';
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +28,13 @@ class App extends Component {
       h('div', { id: 'main', class: (state.lang === 'ar' ? '' : 'override') },
         h(Nav, { lang: state.lang, setLang: linkState(this, 'lang')}),
         h(Router, {history: createHashHistory()},
-          h('div', {path: '/'}, h('h1', {}, 'ROOT')),
+          h('div', { path: '/' },
+            h('h1', {}, labels[state.lang].available_districts),
+            h('ul', {},
+              h('li', {}, h('a', {href: '/beirut2'}, districts[2][`name_${state.lang}`])),
+              h('li', {}, h('a', {href: '/global'}, labels[state.lang].global))
+            )
+          ),
           h(GlobalForm, {
             id: 'global-form',
             path: '/global',

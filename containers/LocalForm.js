@@ -128,7 +128,7 @@ export default class LocalForm extends Component {
     this.setState({ selected: false });
   }
 
-  render ({ lang }, state) {
+  render ({ lang, district }, state) {
     const {data} = state;
     if (!data) {
       console.log('still Fetching');
@@ -163,6 +163,7 @@ export default class LocalForm extends Component {
         )
         : h(Form, {
           class: (state.selected ? 'hide-form' : ''),
+          district: district,
           sect: state.sect,
           gender: state.gender,
           village: state.village,
