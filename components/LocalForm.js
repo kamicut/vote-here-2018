@@ -6,9 +6,8 @@ import GenderPicker from './GenderPicker.js';
 
 const labels = require('../i18n.json');
 const sects = require('../data/sects.json');
-const villages = require('../data/villages.json');
 
-const Form = ({lang, sect, village, sejjel, gender, actions}) => {
+const Form = ({lang, sect, village, villages, sejjel, gender, actions}) => {
   return h(
     'div', {id: 'form'},
     h('header', null,

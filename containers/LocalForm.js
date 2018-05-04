@@ -6,17 +6,6 @@ import labels from '../i18n.json';
 import linkState from 'linkstate';
 import sects from '../data/sects.json';
 
-import beirut2JSON from '../data/beirut2/data.json';
-import beirut2Villages from '../data/beirut2/villages.json';
-
-let selectSects = normalize(sects);
-let districts = {
-  beirut2: {
-    json: beirut2JSON,
-    selectVillages: normalize(beirut2Villages)
-  }
-};
-
 /**
  * Returns an object with the name_ar as keys
  */
@@ -33,9 +22,9 @@ function normalize(data) {
  * @param {Object[]} json
  * @return An index of the polling stations grouped by sect,gender
  */
-function process(district) {
-  let json = districts[district].json;
-  let selectVillages = districts[district].selectVillages;
+function process(json, villages) {
+  const selectSects = normalize(sects);
+  const selectVillages = normalize(villages);
 
   return json.reduce((index, item) => {
     let sect = selectSects[item.sect];
@@ -66,9 +55,32 @@ export default class LocalForm extends Component {
     this.state = {
       selected: false,
       lang: 'ar',
-      data: process(props.district),
       locations: []
     }
+  }
+
+  componentWillMount() {
+    // fetch data according to the district id
+    const district = this.props.district;
+
+    fetch(`/data/${district}/data.json`)
+      .then(response => {
+        if (response.ok) {
+          response.json().then(json => {
+            fetch(`/data/${district}/villages.json`)
+            .then(response => {
+              if (response.ok) {
+                response.json().then(villages => {
+                  this.setState({
+                    data: process(json, villages),
+                    villages: villages
+                  });
+                })
+              }
+            })
+          });
+        }
+      });
   }
 
   /**
@@ -102,7 +114,6 @@ export default class LocalForm extends Component {
         let center = [location.Longitude, location.Latitude];
 
         this.setState({ location, selected: true });
-        console.log(center);
         this.props.setCoordinates(center);
         this.props.changeError('');
       } else {
@@ -118,6 +129,12 @@ export default class LocalForm extends Component {
   }
 
   render ({ lang }, state) {
+    const {data} = state;
+    if (!data) {
+      console.log('still Fetching');
+      return h('div', {}, 'loading...');
+    }
+
     return h('div',
       {},
       (state.selected
@@ -149,6 +166,7 @@ export default class LocalForm extends Component {
           sect: state.sect,
           gender: state.gender,
           village: state.village,
+          villages: state.villages,
           sejjel: state.sejjel,
           lang,
           actions: {
