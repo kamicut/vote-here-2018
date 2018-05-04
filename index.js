@@ -33,6 +33,7 @@ class App extends Component {
             h('ul', {},
               h('li', {}, h('a', {href: '/beirut2'}, districts[2][`name_${state.lang}`])),
               h('li', {}, h('a', {href: '/aley'}, districts[7][`name_${state.lang}`])),
+              h('li', {}, h('a', {href: '/chouf'}, districts[3][`name_${state.lang}`])),
               h('li', {}, h('a', {href: '/global'}, labels[state.lang].global))
             )
           ),

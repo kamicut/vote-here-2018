@@ -110,12 +110,11 @@ export default class LocalForm extends Component {
     if (valid) {
       var locations = this.checkInIndex();
 
-      if (locations.length > 0) {
+      if (locations && locations.length > 0) {
         // Take the first one for now
         let location = locations[0];
-        let center = [location.longitude, location.latitude];
-
         this.setState({ location, selected: true });
+        let center = [location.longitude, location.latitude];
         this.props.setCoordinates(center);
         this.props.changeError('');
       } else {
