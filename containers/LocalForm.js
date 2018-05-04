@@ -28,6 +28,7 @@ function process(json, villages) {
 
   return json.reduce((index, item) => {
     let sect = selectSects[item.sect];
+    if (!sect) { console.log(item.sect)}
 
     if (!index[sect]) {
       index[sect] = {};
@@ -89,6 +90,7 @@ export default class LocalForm extends Component {
   checkInIndex() {
     let { sect, village, gender, sejjel, lang } = this.state;
     let data = this.state.data;
+    console.log(this.state, data);
 
     if (data[sect] && data[sect][village] && data[sect][village][gender]) {
       let fromIndex = data[sect][village][gender];
@@ -111,7 +113,7 @@ export default class LocalForm extends Component {
       if (locations.length > 0) {
         // Take the first one for now
         let location = locations[0];
-        let center = [location.Longitude, location.Latitude];
+        let center = [location.longitude, location.latitude];
 
         this.setState({ location, selected: true });
         this.props.setCoordinates(center);
@@ -145,10 +147,9 @@ export default class LocalForm extends Component {
             ? h('h2', {}, state.location.place)
             : h('h2', {}, state.location.place)),
           h('h3', {}, state.location.street),
-          h('h3', {}, labels[lang].labels.kalam + ' ' + state.location.kalam),
           h('h3', {}, labels[lang].labels.room + ' ' + state.location.room),
           h('a', {
-            href: state.location.google_maps_links || 'https://maps.google.com/?q=' + this.props.center[1] + ',' + this.props.center[0] + '&t=k',
+            href: state.location.google_maps_link || 'https://maps.google.com/?q=' + this.props.center[1] + ',' + this.props.center[0] + '&t=k',
             target: '_blank',
             style: { 
               'font-size': '20px', 
