@@ -150,9 +150,15 @@ export default class LocalForm extends Component {
           h('a', {
             href: state.location.google_maps_links || 'https://maps.google.com/?q=' + this.props.center[1] + ',' + this.props.center[0] + '&t=k',
             target: '_blank',
-            style: { 'font-size': '18px' }
+            style: { 
+              'font-size': '20px', 
+              'text-align': 'center',
+              'display': 'block',
+              'width': '50%',
+              'margin': 'auto'
+             }
           },
-            labels[lang].labels.google_directions
+            `>>> ${labels[lang].labels.google_directions} <<<`
           ),
           h('br'),
           h('input', {
